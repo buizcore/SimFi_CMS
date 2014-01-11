@@ -14,7 +14,8 @@ class DbMysqlResult extends Db_Connection
 
 
   /**
-   *
+   * @param Resouce $result
+   * @param Resouce $connection
    */
   public function __construct($result, $connection)
   {
