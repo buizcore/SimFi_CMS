@@ -17,7 +17,7 @@
  * @package WebFrap
  * @subpackage WebExpert
  */
-class WebExpert
+class SimFi
 {
 
   /**
