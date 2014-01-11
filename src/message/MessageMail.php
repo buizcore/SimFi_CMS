@@ -205,7 +205,7 @@ class MessageMail
     } elseif ($conf->def_mail_sender) {
       $this->sender = $conf->def_mail_sender;
     } else {
-      $this->sender = 'WebExpert mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
+      $this->sender = 'SimFi mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
     }
 
     $this->logger = $logger;

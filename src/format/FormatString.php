@@ -515,7 +515,7 @@ final class FormatString
         $start += $end;
         $end = 0;
         ++$level;
-        if( $level == WebExpert::MAX_PACKAGE_LEVEL )
+        if( $level == SimFi::MAX_PACKAGE_LEVEL )
         {
           break;
         }
@@ -640,7 +640,7 @@ final class FormatString
         $end = 0;
         ++$level;
 
-        if( $level == WebExpert::MAX_PACKAGE_LEVEL )
+        if( $level == SimFi::MAX_PACKAGE_LEVEL )
           break;
       }
       ++$end;

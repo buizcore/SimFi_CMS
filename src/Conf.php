@@ -65,7 +65,7 @@ class Conf
   {
 
     self::$active = new Conf();
-    WebExpert::$conf = self::$active;
+    SimFi::$conf = self::$active;
 
   }// end public static function init */
 

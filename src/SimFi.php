@@ -72,8 +72,8 @@ class SimFi
     $paths[] = PATH_ROOT.self::$conf->page_root.'/module/';
     $paths[] = PATH_ROOT.self::$conf->page_root.'/src/';
 
-    $paths[] = WEBX_PATH.'src/';
-    $paths[] = WEBX_PATH.'module/';
+    $paths[] = SIMFI_CODE_PATH.'src/';
+    $paths[] = SIMFI_CODE_PATH.'module/';
 
 
     foreach( $paths as $path ) {
@@ -142,7 +142,7 @@ class SimFi
         self::$loadAble[$className] = $back;
         return $back;
       }
-      catch( WebExpertException $e )
+      catch( SimFiException $e )
       {
         self::$loadAble[$className] = false;
         return false;
@@ -172,7 +172,7 @@ class SimFi
         self::$loadAble[$classname] = $back;
         return $back;
       }
-      catch( WebExpertException $e )
+      catch( SimFiException $e )
       {
         self::$loadAble[$classname] = false;
         return false;
@@ -357,4 +357,4 @@ class SimFi
 
   }//end public static function checkSyntax */
 
-}//end class WebExpert */
+}//end class SimFi */

@@ -167,7 +167,7 @@ class XmlDocument
    * @param string $path
    * @param string $containerClass
    * 
-   * @throws WebExpertException
+   * @throws SimFiException
    * 
    * @return DOMNodeList
    * 
@@ -191,7 +191,7 @@ class XmlDocument
       }
       else 
       {
-        throw new WebExpertException('Einen nicht existierenden Container angefragt');
+        throw new SimFiException('Einen nicht existierenden Container angefragt');
       }
     }
     

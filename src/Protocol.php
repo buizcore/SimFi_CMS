@@ -30,7 +30,7 @@ class Protocol
       $type = '-'.$type;
     
     if( !$fileName )
-      $fileName = WEBX_PATH.'log/protocol'.$type.'-'.date('YmdHis').'.log';
+      $fileName = SIMFI_CODE_PATH.'log/protocol'.$type.'-'.date('YmdHis').'.log';
     
     self::$writer = new ProtocolWriter( $fileName ); 
       

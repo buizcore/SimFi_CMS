@@ -36,10 +36,10 @@ class TemplateWorkarea_Text extends TemplateWorkarea
         include PATH_ROOT.$this->conf->page_root.'/module/'.$template.'.tpl';
       elseif( Fs::exists( PATH_ROOT.$this->conf->page_root.'/src/'.$template.'.tpl' ) )
         include PATH_ROOT.$this->conf->page_root.'/src/'.$template.'.tpl';
-      elseif( Fs::exists( WEBX_PATH.'module/'.$template.'.tpl' ) )
-        include WEBX_PATH.'modules/'.$template.'.tpl';
-      elseif( Fs::exists( WEBX_PATH.'src/'.$template.'.tpl' ) )
-        include WEBX_PATH.'src/'.$template.'.tpl';
+      elseif( Fs::exists( SIMFI_CODE_PATH.'module/'.$template.'.tpl' ) )
+        include SIMFI_CODE_PATH.'modules/'.$template.'.tpl';
+      elseif( Fs::exists( SIMFI_CODE_PATH.'src/'.$template.'.tpl' ) )
+        include SIMFI_CODE_PATH.'src/'.$template.'.tpl';
       else
         echo 'Missing Template '.$template.NL;
     }
@@ -51,8 +51,8 @@ class TemplateWorkarea_Text extends TemplateWorkarea
 
     if( Fs::exists( PATH_ROOT.$this->conf->page_root.'/content/layouts/'.$this->index.'.tpl' ) )
       include PATH_ROOT.$this->conf->page_root.'/content/layouts/'.$this->index.'.tpl';
-    else if( Fs::exists( WEBX_PATH.'content/layouts/'.$this->index.'.tpl' ) )
-      include WEBX_PATH.'content/layouts/'.$this->index.'.tpl';
+    else if( Fs::exists( SIMFI_CODE_PATH.'content/layouts/'.$this->index.'.tpl' ) )
+      include SIMFI_CODE_PATH.'content/layouts/'.$this->index.'.tpl';
     else
       echo 'Missing Index '.PATH_ROOT.$this->conf->page_root.'/content/layouts/'.$this->index.'.tpl'.NL;
     $redered = ob_get_contents();

@@ -109,7 +109,7 @@ class Fs
     static function delFileDir($filename)
     {
         if (! file_exists($filename)) {
-            throw new WebExpertException("File {$filename} not exists.");
+            throw new SimFiException("File {$filename} not exists.");
         }
         
         $dir = dirname($filename);
@@ -263,10 +263,10 @@ class Fs
     static function setPermission($perm, $protocol = null)
     {
         if (! $perm->directory)
-            throw new WebExpertException('Missing the directory ' . $perm->directory);
+            throw new SimFiException('Missing the directory ' . $perm->directory);
         
         if (! Fs::exists($perm->directory))
-            throw new WebExpertException('Directory ' . $perm->directory . ' not exists.');
+            throw new SimFiException('Directory ' . $perm->directory . ' not exists.');
         
         $cmdRec = '';
         if ($perm->recursive) {

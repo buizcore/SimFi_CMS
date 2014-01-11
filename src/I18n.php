@@ -75,10 +75,10 @@ class I18n
 
     $langPath = str_replace('.','/',$langKey);
 
-    if( file_exists(WEB_ROOT != WEBX_PATH &&  WEB_ROOT.'src/i18n/'.self::$lang.'/'.$langPath.'.php')){
+    if( file_exists(WEB_ROOT != SIMFI_CODE_PATH &&  WEB_ROOT.'src/i18n/'.self::$lang.'/'.$langPath.'.php')){
       include WEB_ROOT.'src/i18n/'.self::$lang.'/'.$langPath.'.php';
-    } else if (file_exists(WEBX_PATH.'i18n/'.self::$lang.'/'.$langPath.'.php') ){
-      include WEBX_PATH.'i18n/'.self::$lang.'/'.$langPath.'.php';
+    } else if (file_exists(SIMFI_CODE_PATH.'i18n/'.self::$lang.'/'.$langPath.'.php') ){
+      include SIMFI_CODE_PATH.'i18n/'.self::$lang.'/'.$langPath.'.php';
     }
 
   }//end public static function loadLang */

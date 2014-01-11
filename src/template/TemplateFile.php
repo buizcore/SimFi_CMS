@@ -57,10 +57,10 @@ class TemplateFile
 
     ob_start();
     foreach( $this->templates as $template ) {
-      if( Fs::exists( WEBX_PATH.'module/'.$template.'.tpl' ) )
-        include WEBX_PATH.'module/'.$template.'.tpl';
-      elseif( Fs::exists( WEBX_PATH.'src/'.$template.'.tpl' ) )
-        include WEBX_PATH.'src/'.$template.'.tpl';
+      if( Fs::exists( SIMFI_CODE_PATH.'module/'.$template.'.tpl' ) )
+        include SIMFI_CODE_PATH.'module/'.$template.'.tpl';
+      elseif( Fs::exists( SIMFI_CODE_PATH.'src/'.$template.'.tpl' ) )
+        include SIMFI_CODE_PATH.'src/'.$template.'.tpl';
       else
         echo 'Missing Template '.$template.NL;
     }

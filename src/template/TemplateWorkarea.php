@@ -193,10 +193,10 @@ class TemplateWorkarea
         include PATH_ROOT.$this->conf->page_root.'/module/'.$i18nTpl;
       elseif( Fs::exists( PATH_ROOT.$this->conf->page_root.'/src/'.$i18nTpl ) )
         include PATH_ROOT.$this->conf->page_root.'/src/'.$i18nTpl;
-      elseif( Fs::exists( WEBX_PATH.'modules/'.$i18nTpl ) )
-        include WEBX_PATH.'modules/'.$i18nTpl;
-      elseif( Fs::exists( WEBX_PATH.'src/'.$i18nTpl ) )
-        include WEBX_PATH.'src/'.$i18nTpl;
+      elseif( Fs::exists( SIMFI_CODE_PATH.'modules/'.$i18nTpl ) )
+        include SIMFI_CODE_PATH.'modules/'.$i18nTpl;
+      elseif( Fs::exists( SIMFI_CODE_PATH.'src/'.$i18nTpl ) )
+        include SIMFI_CODE_PATH.'src/'.$i18nTpl;
       else{
         $i18nErrorTpl = ($this->lang?$this->lang.'/':'').'error/404.tpl';
         include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$i18nErrorTpl;
@@ -225,8 +225,8 @@ class TemplateWorkarea
     $i18nLayout = ($this->lang?$this->lang.'/':'').$this->index.'.tpl';
     if( Fs::exists( PATH_ROOT.$this->conf->page_root.'/content/layouts/'.$i18nLayout ) )
       include PATH_ROOT.$this->conf->page_root.'/content/layouts/'.$i18nLayout;
-    else if( Fs::exists( WEBX_PATH.'content/layouts/'.$i18nLayout ) )
-      include WEBX_PATH.'content/layouts/'.$i18nLayout;
+    else if( Fs::exists( SIMFI_CODE_PATH.'content/layouts/'.$i18nLayout ) )
+      include SIMFI_CODE_PATH.'content/layouts/'.$i18nLayout;
     else
       echo 'Missing Index '.PATH_ROOT.$this->conf->page_root.'/content/layouts/'.$i18nLayout.NL;
     $redered = ob_get_contents();

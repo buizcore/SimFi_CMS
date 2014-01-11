@@ -38,17 +38,17 @@ class Template_Http
 
   /**
    * @param string $key
-   * @throws WebExpertException
+   * @throws SimFiException
    */
   public function useWorkArea( $key )
   {
 
     $className = 'TemplateWorkarea_'.FormatString::subToCamelCase( $key );
 
-    if( WebExpert::classLoadable( $className ) )
+    if( SimFi::classLoadable( $className ) )
       $this->workarea = new $className( );
     else
-      throw new WebExpertException( "Workarea {$key} existiert nicht." );
+      throw new SimFiException( "Workarea {$key} existiert nicht." );
 
     return $this->workarea;
 
@@ -65,10 +65,10 @@ class Template_Http
       if( $key ) {
         $className = 'TemplateWorkarea_'.FormatString::subToCamelCase( $key );
 
-        if( WebExpert::classLoadable( $className ) )
+        if( SimFi::classLoadable( $className ) )
           $this->workarea = new $className( );
         else
-          throw new WebExpertException( "Workarea {$key} existiert nicht." );
+          throw new SimFiException( "Workarea {$key} existiert nicht." );
 
       } else {
 
