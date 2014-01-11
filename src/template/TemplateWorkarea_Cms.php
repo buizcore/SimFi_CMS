@@ -462,6 +462,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     if (!$lang)
       $lang = $this->lang;
 
+
     if($ssl){
 
       return isset($this->links[$key])

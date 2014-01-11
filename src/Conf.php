@@ -96,6 +96,14 @@ class Conf
       include CONF_PATH.'conf/host/'.$domain.'/conf.php';
     else
       include CONF_PATH.'conf/host/web/conf.php';
+    
+    if(!isset($this->settings['base_url'])){
+        $this->settings['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
+    }
+    
+    if(!isset($this->settings['ssl_base_url'])){
+        $this->settings['ssl_base_url'] = 'https://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
+    }
 
   }//end public function __construct */
 
