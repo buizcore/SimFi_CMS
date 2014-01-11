@@ -3,9 +3,8 @@
 
 
 /**
- * Mvc Html View
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class MvcView_Html extends MvcView
 {

@@ -3,8 +3,8 @@
 
 /**
  * Basisklasse für die Datenbankverbindung
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Db_Connection
 {

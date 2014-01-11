@@ -3,8 +3,8 @@
 
 /**
  * Reiner Datencontainer zum speichern von Permissions auf Ordnern
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class StructPermission
 {

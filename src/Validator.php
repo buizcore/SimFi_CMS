@@ -1,10 +1,8 @@
 <?php
 
 /**
- * Filesystem
- * 
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Validator
 {

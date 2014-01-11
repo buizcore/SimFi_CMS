@@ -4,8 +4,8 @@
   
 /**
  * Validator für Text
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Validator_Url
   implements IsaValidator

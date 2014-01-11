@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package WebFrap
- * @subpackage WebFrap
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Password
 {

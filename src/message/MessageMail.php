@@ -28,11 +28,9 @@
 */
 
 /**
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  *
- * @todo Festlegen was passiert wenn sowohl mehrere Empfänger als auch
- * BBC und CC angegeben werden
  *
  */
 class MessageMail

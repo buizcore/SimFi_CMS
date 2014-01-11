@@ -2,8 +2,8 @@
 
 
 /**
- * 
- * @subpackage web_expert.cms
+ * @package com.BuizCore
+ * @subpackage SimFi
  *
  * @property string salutation
  * @property string surname

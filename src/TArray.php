@@ -1,9 +1,8 @@
 <?php
 
 /**
- * Ein Array Objekt für Simple Daten
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class TArray implements Iterator, Countable
 {

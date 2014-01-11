@@ -4,8 +4,8 @@
   
 /**
  * Interface für die Validatoren
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 interface IsaValidator
 {

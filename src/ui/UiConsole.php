@@ -4,8 +4,8 @@
 
 /**
  * Ausgabe von UI elementen in die shell
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 abstract class UiConsole
 {

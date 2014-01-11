@@ -4,8 +4,8 @@
 
 /**
  * Datenbank Hilfsklasse
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class DbAdminPostgresql extends DbAdmin
 {
@@ -707,7 +707,7 @@ SQL;
 
     if( !file_exists( $dumpFile ) )
     {
-      throw new WebExpertException( 'Missing dump '.$dumpFile );
+      throw new SimFiException( 'Missing dump '.$dumpFile );
     }
 
     // wenn das Schema bereits existiert, das vorhandene umbenennen
@@ -737,7 +737,7 @@ SQL;
     $dumpProcess = new ProcessRunner();
     if( !$dumpProcess->open( $command, $callParams, $callEnv ) )
     {
-      throw new WebExpertException( "Failed to Open command {$command}" );
+      throw new SimFiException( "Failed to Open command {$command}" );
     }
     else
     {
@@ -1250,21 +1250,21 @@ SQL;
 
     if( !Fs::exists( $scriptPath ) )
     {
-      throw new WebExpertException( "Habe nicht existierendes DB Script zum importieren bekommen ".$scriptPath );
+      throw new SimFiException( "Habe nicht existierendes DB Script zum importieren bekommen ".$scriptPath );
     }
 
     if( $this->con )
     {
       $error = null;
-      if( WebExpert::checkSyntax( $scriptPath, $error ) )
+      if( SimFi::checkSyntax( $scriptPath, $error ) )
         include $scriptPath;
       else
-        throw new WebExpertException( "Syntax for Datafile: {$scriptPath} is invalid ".$error );
+        throw new SimFiException( "Syntax for Datafile: {$scriptPath} is invalid ".$error );
 
       return;
     }
 
-    $tmpFileName = WebExpert::tmpFile( 'db_dump' );
+    $tmpFileName = SimFi::tmpFile( 'db_dump' );
 
     Fs::touch($tmpFileName);
     file_put_contents

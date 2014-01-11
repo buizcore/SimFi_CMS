@@ -4,8 +4,8 @@
 
 
 /**
- * @package WebFrap
- * @subpackage LibXml
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class XmlNode implements ArrayAccess
 {

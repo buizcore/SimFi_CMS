@@ -2,8 +2,8 @@
 
 
 /**
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  *
  * @property string $page_root pfad zum webseite content
  * @property string $fw_root wo befindet sich der Framework code

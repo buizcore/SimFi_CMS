@@ -2,8 +2,8 @@
 
 
 /**
- * 
- * @subpackage web_expert.cms
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Contact_New_Message extends MessageContainter
 {

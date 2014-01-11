@@ -5,8 +5,8 @@
 /**
  * Interface für den zugriff auf Code Repositories
  * 
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 interface IsAVcsAdapter
 {

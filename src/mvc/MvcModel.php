@@ -3,9 +3,8 @@
 
 
 /**
- * Mvc Basis Model
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class MvcModel extends EnvironmentCore
 {

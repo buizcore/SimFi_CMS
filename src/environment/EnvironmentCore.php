@@ -2,8 +2,8 @@
 
 
 /**
- * @package WebFrap
- * @subpackage Gaia
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class EnvironmentCore
 {

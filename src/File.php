@@ -3,9 +3,8 @@
 
 
 /**
- * Umgang mit Dateien
-  * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class File
 {

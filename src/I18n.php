@@ -3,8 +3,8 @@
 
 
 /**
- * Internationalisierung
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class I18n
 {

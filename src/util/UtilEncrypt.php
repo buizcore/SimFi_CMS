@@ -2,7 +2,8 @@
 
 
 /**
-*
+ * @package com.BuizCore
+ * @subpackage SimFi
 */
 class UtilEncrypt
 {

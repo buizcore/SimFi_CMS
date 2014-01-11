@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package com.buizcore
+ * @package com.BuizCore
  * @subpackage SimFi
  */
 class Page_Controller extends MvcController

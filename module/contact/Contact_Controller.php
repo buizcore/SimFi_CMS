@@ -4,8 +4,8 @@
 include PATH_ROOT.Conf::getActive()->fw_root.'/vendor/securimage/securimage.php';
 
 /**
- * 
- * @subpackage web_expert.cms
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Contact_Controller extends MvcController
 {

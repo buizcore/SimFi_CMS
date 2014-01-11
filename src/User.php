@@ -1,9 +1,8 @@
 <?php
 
 /**
- * Klasse für das Management eines Mercurial Repository
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  *
  * @property string $mail
  * @property string $vorname

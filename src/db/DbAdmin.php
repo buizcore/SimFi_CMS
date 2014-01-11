@@ -4,8 +4,8 @@
 
 /**
  * Datenbank Hilfsklasse
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 abstract class DbAdmin
 {

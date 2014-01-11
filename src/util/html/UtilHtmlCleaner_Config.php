@@ -1,6 +1,9 @@
 <?php
 
 /**
+ * @package com.BuizCore
+ * @subpackage SimFi
+ * 
  * Erzeugt eine neue Instanz eines HTMLPurifier mit den festgelegten Eigenschaften. Die Eigenschaften
  * werden durch die Vererbung an alle abgeleiteten Klassen weitergegeben.
  * Erlaubt sind die meisten Tags für Textauszeichnung, sonst nichts.

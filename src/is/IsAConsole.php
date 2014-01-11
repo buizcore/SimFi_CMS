@@ -4,8 +4,8 @@
   
 /**
  * Interface für Datenbank Verbindungen
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 interface IsAConsole
 {

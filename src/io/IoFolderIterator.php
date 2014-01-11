@@ -3,8 +3,8 @@
 
 
 /**
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class IoFolderIterator
   implements Iterator

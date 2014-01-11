@@ -1,22 +1,9 @@
 <?php
 
 
-///
-/// NEIN, DIES DATEI ERHEBT NICHT DEN ANSPRUCH OOP ZU SEIN.
-/// ES IS EXPLIZIT AUCH NICHT ALS OOP GEWOLLT.
-/// DIE KLASSEN WERDEN LEDIGLICH ALS CONTAINER ZUM ORGANISIEREN DER FUNKTIONEN VERWENDET.
-/// JA DAS IST VIEL CODE FÜR EINE DATEI, NEIN ES IST KEIN PROBLEM
-/// NEIN ES IST WIRKLICH KEIN PROBLEM, SOLLTE ES DOCH ZU EINEM WERDEN WIRD ES
-/// GELÖST SOBALD ES EINS IST
-/// Danke ;-)
-///
-
-
 /**
- * Request Handler
- * Vereinheitlichen der Requests per CLI oder per HTTP / Apachemodul
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Request
 {

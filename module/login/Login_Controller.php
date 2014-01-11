@@ -3,8 +3,8 @@
 
 
 /**
- * 
- * @subpackage web_expert.cms
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Login_Controller extends MvcController
 {

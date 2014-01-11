@@ -3,8 +3,8 @@
 
 
 /**
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  *
  */
 class RequestSubCli

@@ -2,9 +2,8 @@
 
 
 /**
- * Betriebsystem spezifische elemente
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Protocol
 {

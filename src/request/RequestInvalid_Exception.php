@@ -4,11 +4,10 @@
 
 
 /**
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
-class RequestInvalid_Exception
-  extends WebExpertException
+class RequestInvalid_Exception extends SimfiException
 {
 
 

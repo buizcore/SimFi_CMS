@@ -1,10 +1,8 @@
 <?php
 
-
-
 /**
- * @package WebFrap
- * @subpackage WebExpert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class Setting_Controller extends MvcController
 {

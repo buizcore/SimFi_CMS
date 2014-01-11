@@ -2,8 +2,8 @@
 
 
 /**
- * 
- * @subpackage web_expert
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class DbException
-  extends WebExpertException{}
+  extends SimFiException{}

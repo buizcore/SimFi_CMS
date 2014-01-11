@@ -2,8 +2,8 @@
 
 
 /**
- * @package WebFrap
- * @subpackage tech_core
+ * @package com.BuizCore
+ * @subpackage SimFi
  */
 class IoMime
 {
