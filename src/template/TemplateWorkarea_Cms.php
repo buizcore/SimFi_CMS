@@ -463,31 +463,44 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         // ... well... whatever
         return @! is_null($this->values[$key][$subKey]) ? $this->values[$key][$subKey] : null;
+        
     } // end public function getVal */
     
     /**
-     *
+     * Eine CMS konforme / i18n routebare URL zusammen bauen
      * @param string $key            
-     * @param string $ssl            
-     * @param string $subKey            
+     * @param string $subKey          
+     * @param string $lang              
+     * @param boolean $ssl            
      * @return string
      */
-    public function cmsLink($key, $ssl = false, $lang = null)
+    public function cmsLink($key, $subKey = null, $lang = null, $ssl = false)
     {
-        if (! $lang)
+        if (!$lang)
             $lang = $this->lang;
+        
+        if($this->conf->lang == $lang){
+            $lang = '';
+        } else {
+            $lang .= '/';
+        }
         
         if ($ssl) {
             
-            return isset($this->links[$key]) ? $this->conf->ssl_base_url.$lang.'/'.$this->links[$key] : $this->conf->ssl_base_url.$lang.'/'.$key;
+            return isset($this->links[$key]) 
+                ? $this->conf->ssl_base_url.$lang.$this->links[$key].'.html' 
+                : $this->conf->ssl_base_url.$lang.$key.'.html';
         } else {
             
-            return isset($this->links[$key]) ? $this->conf->base_url.$lang.'/'.$this->links[$key] : $this->conf->base_url.$lang.'/'.$key;
+            return isset($this->links[$key]) 
+                ? $this->conf->base_url.$lang.$this->links[$key].'.html' 
+                : $this->conf->base_url.$lang.$key.'.html';
         }
+        
     } // end public function cmsLink */
     
     /**
-     *
+     * checken ob in text key existiert
      * @param string $lang            
      * @return string
      */
@@ -510,7 +523,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         }
         
         return isset($this->texts[$lang][$key]);
-    } // end public function text */
+    } // end public function has */
     
     /**
      *
@@ -659,7 +672,6 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         if (isset($_POST['text'])) {
             foreach ($_POST['text'] as $textKey => $text) {
-                
                 if (is_array($text)) {
                     $this->texts[$this->lang][$textKey] = $text;
                 } else {
