@@ -111,11 +111,55 @@
     function _set_interface() {
       // Apply the HTML markup into body tag
       
+      var bdCnt = '<div id="jquery-overlay" ></div>';
+    	
       if (settings.panoramaMode) {
-        $('body').append('<div id="jquery-overlay" ></div><div id="jquery-lightbox" class="panorama" ><div id="lightbox-container-image-box"><div class="lb-closer" >&nbsp;</div><div class="lb-logo" >&nbsp;</div><div class="lb-open-full" >&nbsp;</div><div class="lb-nav-bar" >&nbsp;</div><div id="lightbox-container-image"><iframe id="lightbox-image" ></iframe><div id="lightbox-loading"><a href="javascript: void();" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a></div></div></div></div></div>');  
-      } else {
-        $('body').append('<div id="jquery-overlay"></div><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div class="lb-closer" >&nbsp;</div><div class="lb-go-left" >&nbsp;</div><div class="lb-go-right" >&nbsp;</div><div id="lightbox-container-image"><img id="lightbox-image"><div style="" id="lightbox-nav"><a href="javascript: void();" id="lightbox-nav-btnNext"></a></div><div id="lightbox-loading"><a href="javascript: void();" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a></div></div></div></div></div>');  
-      }
+    	  
+    	bdCnt = bdCnt
+         +'<div id="jquery-lightbox" class="panorama" >'
+    	 +'  <div id="lightbox-container-image-box">'
+    	 +'    <div class="lb-closer" >&nbsp;</div>'
+    	 +'    <div class="lb-logo" >&nbsp;</div>'
+    	 +'    <div class="lb-open-full" >&nbsp;</div>'
+    	 +'    <div class="lb-nav-bar" >&nbsp;</div>'
+    	 +'    <div id="lightbox-container-image">'
+    	 +'      <iframe id="lightbox-image" ></iframe>'
+    	 +'    </div>'
+    	 +'    <div id="lightbox-loading">'
+    	 +'      <a href="javascript: void();" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a>'
+    	 +'    </div>'
+    	 +'  </div>'
+    	 +'</div>';
+    	  
+        $(bdCnt).appendTo('body');  
+        
+	  } else {
+		  
+		bdCnt = bdCnt
+         +'<div id="jquery-lightbox">'
+    	 +'  <div id="lightbox-container-image-box">'
+    	 +'    <div class="lb-closer" >&nbsp;</div>'
+    	 +'    <div class="lb-go-left" >&nbsp;</div>'
+    	 +'    <div class="lb-go-right" >&nbsp;</div>'
+    	 +'    <div id="lightbox-container-image">'
+    	 +'      <img id="lightbox-image" />'
+    	 +'      <div style="" id="lightbox-nav">'
+    	 +'        <a href="javascript: void();" id="lightbox-nav-btnNext"></a>'
+    	 +'      </div>'
+    	 +'    	 <div id="lightbox-loading">'
+    	 +'        <a href="javascript: void();" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a>'
+    	 +'      </div>'
+    	 +'    </div>'
+    	 +'  </div>'
+    	 +'</div>';
+		  
+	    $(bdCnt).appendTo('body');  
+	  }
+
+      //$('body').html('<div class="left" style="font-size:300px;color:white;" >Hallo Welt</div>');
+      //$('body').append('<div class="left" style="font-size:300px;color:white;" >Hallo Welt</div>');
+      
+      //alert('length jquery-lightbox '+$('#jquery-lightbox').length);
       
       // Get page sizes
       var arrPageSizes = ___getPageSize();
@@ -147,7 +191,6 @@
         left: arrPageScroll[0]
       }).show();
       
-
       if (settings.panoramaMode) {
         
         $('.lb-nav-bar').html($('#lb-navbar-template').text());
