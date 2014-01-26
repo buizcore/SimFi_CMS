@@ -235,66 +235,9 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             unset($_SESSION['user']);
             $this->adminMode = false;
         }
+
         
-        $this->tplPath = PATH_ROOT.$this->conf->page_root.'/content/templates/';
-        $this->pagePath = PATH_ROOT.$this->conf->page_root.'/content/pages/';
-        
-        if ($this->conf->platform) {
-            
-            if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.page.php')) {
-                
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.page.php';
-                
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                }
-            } else 
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php')) {
-                    
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php';
-                    
-                    if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                        include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                    }
-                } else 
-                    if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
-                        
-                        include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php';
-                        
-                        if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                            include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                        }
-                    } else {
-                        
-                        $this->rqtPage = 'error_404';
-                        include PATH_ROOT.$this->conf->page_root.'/content/pages/error_404/page.'.$this->conf->platform.'.php';
-                    }
-        } else {
-            
-            if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php')) {
-                
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php';
-                
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                    
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                }
-            } else 
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
-                    
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php';
-                    
-                    if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                        include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                    }
-                } else {
-                    
-                    $this->rqtPage = 'error_404';
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/error_404/page.php';
-                }
-        }
-        
-        include PATH_ROOT.$this->conf->page_root.'/content/links/'.$this->lang.'.php';
+        $this->loadPageData();
         
         // handle the requested action
         if ($this->mode) {
@@ -370,6 +313,86 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         return $this->renderedContent;
     } // end public function render */
+    
+    /**
+     * Laden der CMS / Metadaten zum rendern der Seite
+     * Keine Ausgabe gestattet
+     */
+    protected function loadPageData()
+    {
+        
+        $this->tplPath = PATH_ROOT.$this->conf->page_root.'/content/templates/';
+        $this->pagePath = PATH_ROOT.$this->conf->page_root.'/content/pages/';
+        
+        if ($this->conf->platform) {
+        
+            if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.page.php')) {
+        
+                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.page.php';
+        
+            } else if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
+        
+                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php';
+        
+            } else {
+        
+                $this->rqtPage = 'error_404';
+                include PATH_ROOT.$this->conf->page_root.'/content/pages/error_404/page.'.$this->conf->platform.'.php';
+            }
+            
+            if($this->rqtPage != 'error_404'){
+                
+                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.text.php')) {
+                
+                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.text.php';
+                
+                } else if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.text.php')) {
+                
+                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.text.php';
+                
+                } else if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/text.php')) {
+                
+                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/text.php';
+                }
+            }
+            
+        } else {
+        
+            if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php')) {
+        
+                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php';
+        
+            } else if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
+        
+                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php';
+        
+            } else {
+        
+                $this->rqtPage = 'error_404';
+                include PATH_ROOT.$this->conf->page_root.'/content/pages/error_404/page.php';
+            }
+            
+            if($this->rqtPage != 'error_404'){
+            
+                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.text.php')) {
+            
+                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.text.php';
+            
+                } else if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/text.php')) {
+            
+                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/text.php';
+                }
+            }
+        }
+        
+        if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
+            include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
+        }
+        
+        include PATH_ROOT.$this->conf->page_root.'/content/links/'.$this->lang.'.php';
+        
+    }//end protected function loadPageData */
+    
     
     /**
      *
@@ -471,10 +494,11 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
      * @param string $key            
      * @param string $subKey          
      * @param string $lang              
-     * @param boolean $ssl            
+     * @param boolean $ssl                 
+     * @param $actionLink $ssl         
      * @return string
      */
-    public function cmsLink($key, $subKey = null, $lang = null, $ssl = false)
+    public function cmsLink($key, $subKey = null, $lang = null, $ssl = false, $actionLink = false)
     {
         if (!$lang)
             $lang = $this->lang;
@@ -485,16 +509,22 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             $lang .= '/';
         }
         
+        $ending = $actionLink?'':'.html';
+        
+        $subLink = '';
+        if($subKey)
+            $subLink = '/'.$subKey ;
+        
         if ($ssl) {
             
             return isset($this->links[$key]) 
-                ? $this->conf->ssl_base_url.$lang.$this->links[$key].'.html' 
-                : $this->conf->ssl_base_url.$lang.$key.'.html';
+                ? $this->conf->ssl_base_url.$lang.$this->links[$key].$subLink.$ending 
+                : $this->conf->ssl_base_url.$lang.$key.$subLink.$ending;
         } else {
             
             return isset($this->links[$key]) 
-                ? $this->conf->base_url.$lang.$this->links[$key].'.html' 
-                : $this->conf->base_url.$lang.$key.'.html';
+                ? $this->conf->base_url.$lang.$this->links[$key].$subLink.$ending
+                : $this->conf->base_url.$lang.$key.$subLink.$ending;
         }
         
     } // end public function cmsLink */

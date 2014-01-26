@@ -23,7 +23,7 @@ class BlogEntry_Entity extends DbEntity
   /**
    * @var string name der tabelle
    */
-  public static $table = 'bc_blog_entry';
+  public static $table = 'simfi_blog_entry';
 
   /**
    * @var string metadaten für die datenbank felder

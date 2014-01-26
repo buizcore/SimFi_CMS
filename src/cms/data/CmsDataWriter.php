@@ -237,6 +237,6 @@ FILE;
     return 'ok';
 
   }//end public function write */
-
+  
 
 }//end class Console */

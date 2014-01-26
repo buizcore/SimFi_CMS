@@ -31,7 +31,7 @@ class BlogWriter
 
 
     if($entryId){
-      $entryNode = $this->db->get( 'bc_blog_entry', $entryId, 'BlogEntry');
+      $entryNode = $this->db->get( 'simfi_blog_entry', $entryId, 'BlogEntry');
     } else {
       $entryNode = new BlogEntry_Entity();
       $entryNode->template =  $_GET['tpl'];

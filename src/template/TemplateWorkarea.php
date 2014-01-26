@@ -157,14 +157,27 @@ class TemplateWorkarea
 
   }//end public function addTemplate */
 
-  public function title()
+  /**
+   * @param $asInput boolean wenn der titel in ein inputfeld geschrieben werden soll (zum editieren halt..)
+   * @return string
+   */
+  public function title($asInput = false)
   {
 
-    if (isset($this->title[$this->lang])) {
-      return $this->title[$this->lang];
+    if($asInput){
+        if (isset($this->title[$this->lang])) {
+            return $this->title[$this->lang];
+        } else {
+            return '';
+        }  
     } else {
-      $this->conf->title;
+        if (isset($this->title[$this->lang])) {
+            return $this->title[$this->lang];
+        } else {
+            $this->conf->title;
+        }    
     }
+
 
   }//end public function title */
 

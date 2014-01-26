@@ -33,7 +33,7 @@ class BlogReader
     // laden der Einträge
     $sql = <<<SQL
 SELECT *
-FROM bc_blog_entry
+FROM simfi_blog_entry
 {$where}
 ORDER BY created desc
 

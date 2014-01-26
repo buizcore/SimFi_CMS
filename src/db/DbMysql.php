@@ -214,8 +214,8 @@ SQL;
         
         $result = $this->connection->query($sql);
         
-        if (! $result) {
-            throw new DbException($result->error);
+        if (!$result) {
+            throw new DbException($this->connection->error);
         }
         
         return new DbMysqlResult($result, $this);
