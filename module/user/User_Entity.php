@@ -13,7 +13,7 @@ class User_Entity extends DbEntity
     'name' => array(
       Db::LABEL => 'text',
       Db::SIZE => 250,
-      Db::REQUIRED = true,
+      Db::REQUIRED => true,
       Db::UNIQUE = true,
       Db::VALIDATOR = Validator::EMAIL
     ),

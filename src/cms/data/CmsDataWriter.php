@@ -72,9 +72,7 @@ class CmsDataWriter
 
     $file = <<<FILE
 <?php
-\$this->activePage = '{$this->activePage}';
-\$this->editAble = true;
-
+        
 // texts
 
 FILE;

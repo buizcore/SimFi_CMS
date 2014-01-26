@@ -246,6 +246,11 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                     $this->savePage($this->mode);
                     return;
                 }
+
+                if ('saveMeta' === $this->mode && isset($_POST) && $this->adminMode) {
+                    $this->savePage($this->mode);
+                    return;
+                }
                 
                 if ('upload' === $this->mode && isset($_POST) && $this->adminMode) {
                     $this->savePage($this->mode);
@@ -275,6 +280,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 include $tplName;
             else
                 echo 'Missing Template '.$this->cmsTemplate.NL;
+            
         } else {
             
             if ($this->conf->platform) {
@@ -555,65 +561,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         return isset($this->texts[$lang][$key]);
     } // end public function has */
     
-    /**
-     *
-     * @param string $key
-     * @return string
-     */
-    protected function getPageElemPath($key)
-    {
-        if ($this->conf->platform) {
-            
-            if (file_exists(SIMFI_CONTENT_PATH.'content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.'.$key.'.php')) {
-                
-                return SIMFI_CONTENT_PATH.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.'.$key.'.php';
-                
-            } else  if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php')) {
-                    
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php';
-                
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                }
-            } else  if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
-                    
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php';
-                
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                }
-            } else {
-                
-                $this->rqtPage = 'error_404';
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/error_404/page.'.$this->conf->platform.'.php';
-            }
-        } else {
-            
-            if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php')) {
-                
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php';
-                
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                    
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                }
-            } else if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
-                    
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php';
-                
-                if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php')) {
-                    include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
-                }
-            } else {
-                
-                $this->rqtPage = 'error_404';
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/error_404/page.php';
-            }
-  
-        }
-        
-    } // end protected function getPageElemPath */
-    
+
     /**
      *
      * @param string $key            
@@ -710,11 +658,25 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             }
         }
         
+        if (isset($_POST['meta'])) {
+            $this->title[$this->lang] = strip_tags(trim($_POST['meta']['title'])) ;
+            $this->metaDescription[$this->lang] = strip_tags(trim($_POST['meta']['description']));
+            $this->metaTags[$this->lang] = explode(',',trim($_POST['meta']['tags']));
+        }
+        
         $pageWriter = new CmsDataWriter($this);
-        $pageWriter->write(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php');
-        chmod(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php', 0775);
+        
+        if ($this->conf->cms_dev_mode) {
+            $pageWriter->write(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/text.php');
+            chmod(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/text.php', 0775);
+        } else {
+            $pageWriter->write(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.text.php');
+            chmod(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.text.php', 0775);
+        }
+        
         
         $this->jsonData['status'] = 'ok';
+        
     } // end protected function savePage */
     
 }//end class TemplateWorkarea_Cms */
