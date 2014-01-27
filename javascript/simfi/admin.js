@@ -96,7 +96,7 @@ $(document).ready(function(){
             //forceFallback: true,
             addRemoveLinks: true,
             maxThumbnailFilesize:5,
-            previewsContainer: '#upload-preview',
+            previewsContainer: '#simfi-upload-preview',
             init: function() {
               this.on("processing", function(file) {
 
@@ -124,6 +124,7 @@ $(document).ready(function(){
           jNode.find('.dz-default.dz-message').remove();
         });
 
+        /*  dropdown */
         $('.dzl').each(function(){
 
           jNode = $(this);
@@ -137,7 +138,7 @@ $(document).ready(function(){
             //forceFallback: true,
             addRemoveLinks: true,
             maxThumbnailFilesize:5,
-            previewsContainer: '#upload-preview',
+            previewsContainer: '#simfi-upload-preview',
             success:function(file, response){
 
               //$R.handelSuccess($S.parseXML(response));
@@ -147,44 +148,73 @@ $(document).ready(function(){
           jNode.find('.dz-default.dz-message').remove();
         });
         
-
-
+        /* Editierbare Bilder */
         $('.crop').each(function(){
 
           var jNode = $(this);
           
           var pos = {},
           imgWidth = 0,
-          imgHeight = 0;
-          var clickCrop = function(evt){
+          imgHeight = 0,
+          jcrop_api = null,
+          
+          removeCrop = function(){
+              $('#panel-crop-controls').remove();
+              $('#main-content').off('click',clickCrop);
+              jcrop_api.release();
+          },          
+          clickCrop = function(evt){
               
              var clckTarget = $(evt.target);
               
              if( !clckTarget.parentX(jNode.next()) && !clckTarget.parentX('div#panel-crop-controls') && !clckTarget.is('div#panel-crop-controls') ){
-                 $('#panel-crop-controls').remove();
-                 $('#main-content').off('click',clickCrop);
+                 removeCrop();
              } 
           };
           
           jNode.Jcrop({
-              'onSelect': function(){
-                  $('#main-content').off('click',clickCrop);
+              'onSelect': function(cords){
                   
+                  if($('#panel-crop-controls').is('#panel-crop-controls')){
+                      $('#inp-img-crops-x').val(cords.x);
+                      $('#inp-img-crops-y').val(cords.y);
+                      $('#inp-img-crops-x2').val(cords.x2);
+                      $('#inp-img-crops-y2').val(cords.y2);
+                      return;
+                  }
+
                   pos = jNode.next().offset();
                   imgWidth = jNode.outerWidth();
                   imgHeight = jNode.outerHeight();
                   
-                  $('#main-content').append(
-                      '<div id="panel-crop-controls" style="top:'+(pos.top+imgHeight)+'px;left:'+ (pos.left)+'px;width:'+imgWidth+'px;" >Controls</div>'
-                  );
+                  
+                  var tpl = $('#tpl-grop-menu').html();
+                  tpl = Handlebars.compile(tpl);
+                  
+                  var data = {
+                    'top':(pos.top+imgHeight),
+                    'left':pos.left,
+                    'width': imgWidth,
+                    'imgHeight': imgHeight,
+                    'imgWidth': imgWidth,
+                    'alt': jNode.attr('alt')
+                  }
+    
+                  $('#main-content').append(tpl(data));
+                  
+                  $('#inp-img-crops-x').val(cords.x);
+                  $('#inp-img-crops-y').val(cords.y);
+                  $('#inp-img-crops-x2').val(cords.x2);
+                  $('#inp-img-crops-y2').val(cords.y2);
                   
                   $('#main-content').on('click',clickCrop);
                   
               },
               'onRelease': function(){
-                  $('#main-content').off('click',clickCrop);
-                  $('#panel-crop-controls').remove();
+                  removeCrop();
               }
+          },function(){
+              jcrop_api = this;
           });
 
         });
