@@ -146,6 +146,48 @@ $(document).ready(function(){
 
           jNode.find('.dz-default.dz-message').remove();
         });
+        
+
+
+        $('.crop').each(function(){
+
+          var jNode = $(this);
+          
+          var pos = {},
+          imgWidth = 0,
+          imgHeight = 0;
+          var clickCrop = function(evt){
+              
+             var clckTarget = $(evt.target);
+              
+             if( !clckTarget.parentX(jNode.next()) && !clckTarget.parentX('div#panel-crop-controls') && !clckTarget.is('div#panel-crop-controls') ){
+                 $('#panel-crop-controls').remove();
+                 $('#main-content').off('click',clickCrop);
+             } 
+          };
+          
+          jNode.Jcrop({
+              'onSelect': function(){
+                  $('#main-content').off('click',clickCrop);
+                  
+                  pos = jNode.next().offset();
+                  imgWidth = jNode.outerWidth();
+                  imgHeight = jNode.outerHeight();
+                  
+                  $('#main-content').append(
+                      '<div id="panel-crop-controls" style="top:'+(pos.top+imgHeight)+'px;left:'+ (pos.left)+'px;width:'+imgWidth+'px;" >Controls</div>'
+                  );
+                  
+                  $('#main-content').on('click',clickCrop);
+                  
+              },
+              'onRelease': function(){
+                  $('#main-content').off('click',clickCrop);
+                  $('#panel-crop-controls').remove();
+              }
+          });
+
+        });
 
       };
 
