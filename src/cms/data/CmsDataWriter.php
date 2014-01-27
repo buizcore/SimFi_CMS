@@ -167,11 +167,11 @@ FILE;
             foreach ($imageData as $imgPKey => $imgParam) {
 
               if (is_string($imgParam)) {
-                $imgParams .= "'{$imgParam}',";
+                $imgParams .= " '{$imgPKey}' => '{$imgParam}',";
               } else if (is_bool($imgParam) ) {
                 $imgParams .= ($imgParam?'true':'false').',';
               } else if( is_array($imgParam)) {
-                $imgParams .= 'array( ';
+                $imgParams .= " '{$imgPKey}' => array( ";
                 foreach($imgParam as $lKey => $lText){
                   $imgParams .= "'{$lKey}' => '{$lText}',";
                 }
@@ -179,7 +179,7 @@ FILE;
 
               }  else {
 
-                $imgParams .= "'{$imgParam}',";
+                $imgParams .= " '{$imgPKey}' => '{$imgParam}',";
               }
 
             }

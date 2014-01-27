@@ -194,7 +194,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         // wenn ajax dann geben wir json zurück
         if (isset($_GET['ajax'])) {
-            $this->contentType = 'text/json';
+            //$this->contentType = 'text/json';
         }
         
         // user ist eingeloggt
@@ -240,27 +240,31 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         $this->loadPageData();
         
         // handle the requested action
+        
+        $break = false;
+        
         if ($this->mode) {
             if (! $this->handelAction($this->mode)) {
                 if ('save' === $this->mode && isset($_POST) && $this->adminMode) {
                     $this->savePage($this->mode);
-                    return;
+                    $break = true;
                 }
 
                 if ('saveMeta' === $this->mode && isset($_POST) && $this->adminMode) {
                     $this->savePage($this->mode);
-                    return;
+                    $break = true;
                 }
                 
                 if ('upload' === $this->mode && isset($_POST) && $this->adminMode) {
                     $this->savePage($this->mode);
-                    return;
+                    $break = true;
                 }
             }
         }
         
+        
         // wenn ajax dann ist hier schluss
-        if (isset($_GET['ajax'])) {
+        if (isset($_GET['ajax'])||$break) {
             $this->renderedContent = json_encode($this->jsonData);
             return $this->renderedContent;
         }
@@ -648,6 +652,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         $purifier = new HTMLPurifier($config);
         
+        // save text
         if (isset($_POST['text'])) {
             foreach ($_POST['text'] as $textKey => $text) {
                 if (is_array($text)) {
@@ -658,6 +663,48 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             }
         }
         
+
+        $this->jsonData['files'] = $_FILES;
+        $this->jsonData['get'] = $_GET;
+        $this->jsonData['post'] = $_POST;
+        // save images
+        if (isset($_FILES['img'])) {
+            
+   
+            foreach($_FILES['img']['name'] as $key => $imgName){
+       
+                $this->images['page'][$key]['src'] = './static/images/'.$this->activePage.'/page/'.$imgName;
+
+                if(!Fs::exists('./static/images/'.$this->activePage.'/page/')){
+                    Fs::mkdir('./static/images/'.$this->activePage.'/page/');
+                }
+
+                if(isset($_GET['dim'])){
+
+                    Fs::copyFile($_FILES['img']['tmp_name'][$key], './static/images/'.$this->activePage.'/page/'.$imgName.'.orig');
+                    
+                    $tmp = explode('-',$_GET['dim']) ;
+                    
+                    $nameStack = pathinfo('./static/images/'.$this->activePage.'/page/'.$imgName);
+                    $imgName = $nameStack['filename'].'.jpg';
+                    
+                    $imageFormatter = new UtilImageFormatter_Gd();
+                    $imageFormatter->resize($_FILES['img']['tmp_name'][$key],'./static/images/'.$this->activePage.'/page/'.$imgName,$tmp[0],$tmp[1]);
+                    
+                    
+                } else {
+                    Fs::copyFile($_FILES['img']['tmp_name'][$key], './static/images/'.$this->activePage.'/page/'.$imgName);
+                }
+                
+                
+                $this->jsonData['new_src'] = './static/images/'.$this->activePage.'/page/'.$imgName;
+
+            }
+            
+            $this->jsonData['files'] = $_FILES;
+        }
+        
+        // save meta information
         if (isset($_POST['meta'])) {
             $this->title[$this->lang] = strip_tags(trim($_POST['meta']['title'])) ;
             $this->metaDescription[$this->lang] = strip_tags(trim($_POST['meta']['description']));

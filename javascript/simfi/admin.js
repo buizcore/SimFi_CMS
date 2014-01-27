@@ -91,12 +91,15 @@ $(document).ready(function(){
           jNode.dropzone({
             url: sfSetting.upload,
             uploadMultiple: false,
-            paramName: jNode.attr('data-zone'),
-            clickable: this,
+            paramName: jNode.attr('data-p_name')||'image',
+            clickable: false,
             //forceFallback: true,
             addRemoveLinks: true,
             maxThumbnailFilesize:5,
             previewsContainer: '#simfi-upload-preview',
+            drop:function(){
+                $('#simfi-upload-preview').show();  
+            },
             init: function() {
               this.on("processing", function(file) {
 
@@ -110,11 +113,11 @@ $(document).ready(function(){
               });
             },
             success:function(file, response){
+                
+              var jsonResp = $.parseJSON(response);
+              setNewImage(jNode,jsonResp);
             	
               if (jNode.attr('data-callback')) {
-
-                var jsonResp = $.parseJSON(response);
-
                 window.bc_callbacks[jNode.attr('data-callback')](jNode,jsonResp);
               }
               //$R.handelSuccess($S.parseXML(response));
@@ -133,12 +136,15 @@ $(document).ready(function(){
           jNode.dropzone({
             url: sfSetting.upload+'?ajax=true',
             uploadMultiple: true,
-            paramName: jNode.attr('data-zone'),
+            paramName: jNode.attr('data-p_name')||'image',
             clickable: this,
             //forceFallback: true,
             addRemoveLinks: true,
             maxThumbnailFilesize:5,
             previewsContainer: '#simfi-upload-preview',
+            drop:function(){
+              $('#simfi-upload-preview').show();  
+            },
             success:function(file, response){
 
               //$R.handelSuccess($S.parseXML(response));
@@ -244,22 +250,7 @@ $(document).ready(function(){
         });
 
         $.post( sfSetting.save+"?ajax=true", data );
-        jSuccess('Die Seite wurden gespeichert',{
-              autoHide : true, // added in v2.0
-              clickOverlay : false, // added in v2.0
-              MinWidth : 250,
-              TimeShown : 1500,
-              ShowTimeEffect : 200,
-              HideTimeEffect : 200,
-              LongTrip :20,
-              HorizontalPosition : 'left',
-              VerticalPosition : 'bottom',
-              ShowOverlay : true,
-              ColorOverlay : '#000',
-              OpacityOverlay : 0.5,
-              onClosed : function(){},
-              onCompleted : function(){}
-        });
+        reportSuccess('Die Seite wurden gespeichert');
 
     });
       
@@ -269,30 +260,55 @@ $(document).ready(function(){
         var data = $('#form-meta-data').find(':input').serialize();
         
         $.post( sfSetting.saveMeta+"?ajax=true", data );
-        jSuccess('Die Metadaten wurden gespeichert',{
-              autoHide : true, // added in v2.0
-              clickOverlay : false, // added in v2.0
-              MinWidth : 250,
-              TimeShown : 1500,
-              ShowTimeEffect : 200,
-              HideTimeEffect : 200,
-              LongTrip :20,
-              HorizontalPosition : 'left',
-              VerticalPosition : 'bottom',
-              ShowOverlay : true,
-              ColorOverlay : '#000',
-              OpacityOverlay : 0.5,
-              onClosed : function(){},
-              onCompleted : function(){}
-        });
+        reportSuccess('Die Metadaten wurden gespeichert');
         
         $('#simfi-meta-editor').hide();
         
         return false;
     });
+    
+
+    function reportSuccess(msg){
+        jSuccess(msg,{
+            autoHide : true, // added in v2.0
+            clickOverlay : false, // added in v2.0
+            MinWidth : 250,
+            TimeShown : 1500,
+            ShowTimeEffect : 200,
+            HideTimeEffect : 200,
+            LongTrip :20,
+            HorizontalPosition : 'left',
+            VerticalPosition : 'bottom',
+            ShowOverlay : true,
+            ColorOverlay : '#000',
+            OpacityOverlay : 0.5,
+            onClosed : function(){},
+            onCompleted : function(){}
+      });
+    }
+    
+    function setNewImage(jNode,jsonResp){
+        jNode.attr('src',jsonResp.new_src);
+    }
 
     
     window.setInterval(function(){$('.mce-resizehandle').hide();},300);
+    
+    window.setInterval(function(){
+        $('#simfi-upload-preview .dz-preview').each(function(){
+            var uplPrev = $(this);
+            if(uplPrev.find('.dz-upload')){
+                
+            }
+            uplPrev.fadeOut(300);
+            uplPrev.remove();
+        });
+        
+        if(!$('#simfi-upload-preview .dz-preview').length){
+            $('#simfi-upload-preview').fadeOut(500);
+        }
+        
+    },6000);
 
     
 });

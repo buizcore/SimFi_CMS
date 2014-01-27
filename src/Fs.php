@@ -50,6 +50,20 @@ class Fs
     /**
      * Datei oder Ordner rekursiv kopieren
      *
+     * @param string $src
+     * @param string $target
+     * @param boolean $isFolder
+     */
+    static function copyFile($src, $target)
+    {
+        copy($src, $target);
+    
+        return true;
+    } // end static function copyFile */
+    
+    /**
+     * Datei oder Ordner rekursiv kopieren
+     *
      * @param string $src            
      * @param string $target            
      * @param boolean $isFolder            
@@ -217,7 +231,7 @@ class Fs
     {
         $dir = dirname($path);
         
-        if (! Fs::exists($dir))
+        if (!Fs::exists($dir))
             Fs::mkdir($dir);
     } // end static function touchFileFolder */
     
