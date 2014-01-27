@@ -5,6 +5,12 @@ $(document).ready(function(){
     
     $('#open-metas').on('click',function(){
         $('#simfi-meta-editor').toggle();
+        $(this).parent().toggleClass('active');
+    });
+    
+    $('#btn-simfi-settings').on('click',function(){
+        $('#simfi-settings-editor').toggle();
+        $(this).parent().toggleClass('active');
     });
 
     $('#menu-trigger').on('click',function(){
