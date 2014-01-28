@@ -33,7 +33,7 @@ class GalleryReader
     // laden der Einträge
     $sql = <<<SQL
 SELECT *
-FROM bc_gallery_entry
+FROM simfi_gallery_entry
 {$where}
 ORDER BY created desc
 

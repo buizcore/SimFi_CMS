@@ -19,12 +19,15 @@ class GalleryWriter
   public $conf = null;
 
 
+  /**
+   * 
+   */
   public function __construct()
   {
     $this->db = Db::getConnection('default');
     $this->conf = Conf::getActive();
 
-  }
+  }//end public function __construct */
 
   /**
    * Save the galler request
@@ -34,7 +37,7 @@ class GalleryWriter
 
 
     if($entryId){
-      $entryNode = $this->db->get( 'bc_gallery_entry', $entryId, 'GalleryEntry');
+      $entryNode = $this->db->get( 'simfi_gallery_entry', $entryId, 'GalleryEntry');
     } else {
       $entryNode = new GalleryEntry_Entity();
       $entryNode->created = date('Y-m-d H:i:s');
@@ -81,7 +84,7 @@ class GalleryWriter
 
 
     if ($entryId) {
-      $entryNode = $this->db->get( 'bc_gallery_entry', $entryId, 'GalleryEntry');
+      $entryNode = $this->db->get( 'simfi_gallery_entry', $entryId, 'GalleryEntry');
 
       $entryNode->img_name = 'static/images/gallery/'.$data['name'];
       $entryNode->img_name_big = 'static/images/gallery/big/'.$data['name'];
@@ -101,7 +104,7 @@ class GalleryWriter
   public function deleteEntry($entryId)
   {
 
-    $this->db->delete( 'bc_gallery_entry', $entryId);
+    $this->db->delete( 'simfi_gallery_entry', $entryId);
 
   }//end public function deleteEntry */
 
@@ -113,7 +116,7 @@ class GalleryWriter
 
     $entryId = (int)$_GET['entry'];
 
-    $entryNode = $this->db->get( 'bc_gallery_entry', $entryId, 'GalleryEntry');
+    $entryNode = $this->db->get( 'simfi_gallery_entry', $entryId, 'GalleryEntry');
 
     if ($publish) {
       $entryNode->active = 1;
