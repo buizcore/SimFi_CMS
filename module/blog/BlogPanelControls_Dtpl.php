@@ -17,11 +17,14 @@ class BlogPanelControls_Dtpl extends Dyntemplate
 
 
     $code = <<<HTML
-  <div class="block" >
-    <label>Neuen Blogeintrag anlegen:&nbsp;&nbsp;</label>
-    <a id="bc-new-text_image">Mit Bild <i class="fa fa-picture-o" ></i></a> |
-    <a id="bc-new-text_only">Nur Text <i class="fa fa-list-alt" ></i></a>
-  </div>
+    
+  <div 
+    class="m-button tip-r" 
+    title="Blogeintrag mit Bild" ><button id="bc-new-text_image"><i class="fa fa-picture-o fa-2x" ></i></button></div>
+  <div 
+    class="m-button tip-r" 
+    title="Nur Text Blogeintrag" ><button id="bc-new-text_only"><i class="fa fa-align-justify fa-2x" ></i></button></div>
+
 HTML;
 
     return $code;

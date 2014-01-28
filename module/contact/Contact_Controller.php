@@ -147,6 +147,7 @@ class Contact_Controller extends MvcController
 
         if($confObj->def_reply_to)
           $newContactMsg->replyTo = $confObj->def_reply_to;
+        
         $newContactMsg->receiver = $confObj->admin_mail;
 
         // wird vorab benötigt falls in send message eine exception kommt
@@ -174,8 +175,10 @@ class Contact_Controller extends MvcController
         $workarea->lang = $lang;
         //$workarea->addTemplate( 'contact_sent' );
         $workarea->rqtPage = 'contact_sent';
+        
       }
       catch (Exception $exc){
+        
         $workarea->addVar('errors',$rqt->errors);
         $workarea->lang = $lang;
         $workarea->addVar('contact',$rqt->entities['contact']);

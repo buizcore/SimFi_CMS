@@ -17,9 +17,9 @@ class GalleryPanelControls_Dtpl extends Dyntemplate
 
 
     $code = <<<HTML
-  <div class="block" >
-    <a id="bc-new-image">Ein Bild hinzufügen <i class="fa fa-picture-o" ></i></a>
-  </div>
+  <div 
+    class="m-button tip-r" 
+    title="Ein neues Bild hinzufügen" ><button id="bc-new-image"><i class="fa fa-picture-o fa-2x" ></i></button></div>
 HTML;
 
     return $code;
