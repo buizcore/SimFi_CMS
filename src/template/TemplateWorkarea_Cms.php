@@ -173,7 +173,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     
     /**
      *
-     * @return Ambigous <string, multitype:>
+     * @return string
      */
     public function renderMetaDesc()
     {
@@ -244,7 +244,8 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         $break = false;
         
         if ($this->mode) {
-            if (! $this->handelAction($this->mode)) {
+            if (!$this->handelAction($this->mode)) {
+                
                 if ('save' === $this->mode && isset($_POST) && $this->adminMode) {
                     $this->savePage($this->mode);
                     $break = true;
@@ -368,11 +369,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             
         } else {
         
-            if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php')) {
-        
-                include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/custom.page.php';
-        
-            } else if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
+            if (file_exists(PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php')) {
         
                 include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/page.php';
         
@@ -662,11 +659,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 }
             }
         }
-        
 
-        $this->jsonData['files'] = $_FILES;
-        $this->jsonData['get'] = $_GET;
-        $this->jsonData['post'] = $_POST;
         // save images
         if (isset($_FILES['img'])) {
             
