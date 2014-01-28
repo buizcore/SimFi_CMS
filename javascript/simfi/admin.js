@@ -1,5 +1,6 @@
 
 window.bc_callbacks = {};
+var initEditor = null;
 
 $(document).ready(function(){
     
@@ -21,7 +22,7 @@ $(document).ready(function(){
         $('.contr-submenu').css('display','block');
     });
 
-    var initEditor = function(){
+    initEditor = function(){
 
 		tinymce.init({
 		    selector: ".ec",
