@@ -93,7 +93,7 @@ $(document).ready(function(){
             url: sfSetting.upload,
             uploadMultiple: false,
             paramName: jNode.attr('data-p_name')||'image',
-            clickable: false,
+            clickable: true,
             //forceFallback: true,
             addRemoveLinks: true,
             maxThumbnailFilesize:5,
