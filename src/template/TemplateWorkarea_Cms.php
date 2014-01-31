@@ -502,7 +502,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
      * @param string $subKey          
      * @param string $lang              
      * @param boolean $ssl                 
-     * @param $actionLink $ssl         
+     * @param boolean $actionLink         
      * @return string
      */
     public function cmsLink($key, $subKey = null, $lang = null, $ssl = false, $actionLink = false)
@@ -663,27 +663,40 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         // save images
         if (isset($_FILES['img'])) {
             
-   
             foreach($_FILES['img']['name'] as $key => $imgName){
        
-                $this->images['page'][$key]['src'] = './static/images/'.$this->activePage.'/page/'.$imgName;
-
                 if(!Fs::exists('./static/images/'.$this->activePage.'/page/')){
                     Fs::mkdir('./static/images/'.$this->activePage.'/page/');
                 }
 
                 if(isset($_GET['dim'])){
-
+                    
                     Fs::copyFile($_FILES['img']['tmp_name'][$key], './static/images/'.$this->activePage.'/page/'.$imgName.'.orig');
                     
                     $tmp = explode('-',$_GET['dim']) ;
-                    
+
                     $nameStack = pathinfo('./static/images/'.$this->activePage.'/page/'.$imgName);
                     $imgName = $nameStack['filename'].'.jpg';
                     
-                    $imageFormatter = new UtilImageFormatter_Gd();
-                    $imageFormatter->resize($_FILES['img']['tmp_name'][$key],'./static/images/'.$this->activePage.'/page/'.$imgName,$tmp[0],$tmp[1]);
+                    $this->images['page'][$key]['src'] = './static/images/'.$this->activePage.'/page/'.$imgName;
                     
+                    $imageFormatter = new UtilImageFormatter_Gd();
+                    
+                    if(isset($_GET['crop'])){
+                        $imageFormatter->resizeCropOverflow(
+                            $_FILES['img']['tmp_name'][$key],
+                            $tmp[0],
+                            $tmp[1],
+                            './static/images/'.$this->activePage.'/page/'.$imgName
+                        );
+                    } else {
+                        $imageFormatter->resize(
+                            $_FILES['img']['tmp_name'][$key],
+                            './static/images/'.$this->activePage.'/page/'.$imgName,
+                            $tmp[0],
+                            $tmp[1]
+                        );
+                    }
                     
                 } else {
                     Fs::copyFile($_FILES['img']['tmp_name'][$key], './static/images/'.$this->activePage.'/page/'.$imgName);

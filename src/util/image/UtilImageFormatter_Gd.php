@@ -42,7 +42,7 @@ class UtilImageFormatter_Gd extends UtilImageFormatterAdapter
             // neugenerieren des THUMBS
             $thumb = imagecreatetruecolor($newWidth, $newHeight);
             
-            imagecopyresampled($thumb, $im, 0, 0, 0, 0, $newWidth, $newHeight, $imgData->width, $imgData->height);
+            imagecopyresampled($thumb, $imgData->res, 0, 0, 0, 0, $newWidth, $newHeight, $imgData->width, $imgData->height);
             
             $path = pathinfo($newName);
             
@@ -191,16 +191,24 @@ class UtilImageFormatter_Gd extends UtilImageFormatterAdapter
         $dstY = (int)(0.5 * ($height - $dstH));
     
         //bild auf neue zielgrösse bestimmen. dabei ist erst eine seite korrekt
-        $new_image = imagecreatetruecolor($dstW, $dstH);
-        imagecopyresampled($new_image, $imgData->res, 0, 0, 0, 0, $dstW, $dstH, $src_w, $src_h);
+        $resizedImg = imagecreatetruecolor($dstW, $dstH);
+        imagecopyresampled($resizedImg, $imgData->res, 0, 0, 0, 0, $dstW, $dstH, $imgData->width, $imgData->height);
     
         //prüfen ob abgeschnitten werden muss. falls ja neues bild mit definitiver grösse erstellen und altes verschoben einkopieren.
         if ($dstW != $width || $dstH != $height || $dstX != 0 || $dstY != 0) {
-            $final_image = imagecreatetruecolor($width, $height);
-            imagecopyresampled($final_image, $new_image, 0, 0, -$dstX, -$dstY, $width, $height, $width, $height);
-            $new_image = $final_image;
+            $croppedImg = imagecreatetruecolor($width, $height);
+            imagecopyresampled($croppedImg, $resizedImg, 0, 0, -$dstX, -$dstY, $width, $height, $width, $height);
+            $resizedImg = $croppedImg;
         }
-        $this->image = $new_image;
+        
+        $path = pathinfo($newName);
+        if (!file_exists($path['dirname'])) {
+            Fs::mkdir($path['dirname'],'0755');
+        }
+        
+        if (! imagejpeg($resizedImg, $newName, 95)) {
+            throw new SimFiException('Failed to create ' . $newName);
+        }
     }
     
     /**

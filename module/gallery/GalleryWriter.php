@@ -79,8 +79,8 @@ class GalleryWriter
 
 
     $imgRes = new UtilImageFormatter_Gd();
-    $imgRes->resize($data['tmp_name'], $savePath.$data['name'], 440, 360);
-    $imgRes->resize($data['tmp_name'], $savePath.'big/'.$data['name'], 800, 600);
+    $imgRes->resizeCropOverflow($data['tmp_name'], 440, 360, $savePath.$data['name']);
+    $imgRes->resizeCropOverflow($data['tmp_name'], 800, 600, $savePath.'big/'.$data['name']);
 
 
     if ($entryId) {

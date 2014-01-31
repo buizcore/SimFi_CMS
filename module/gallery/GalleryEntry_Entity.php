@@ -22,7 +22,7 @@ class GalleryEntry_Entity extends DbEntity
   /**
    * @var string name der tabelle
    */
-  public static $table = 'bc_gallery_entry';
+  public static $table = 'simfi_gallery_entry';
 
   /**
    * @var string metadaten für die datenbank felder

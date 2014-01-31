@@ -21,7 +21,7 @@ class Contact_Entity extends DbEntity
   /**
    * @var string name der tabelle
    */
-  public static $table = 'webcms_contact';
+  public static $table = 'simfi_contact';
 
   /**
    * @var string metadaten für die datenbank felder
