@@ -2,6 +2,10 @@
 window.bc_callbacks = {};
 var initEditor = null;
 
+var checkClose = function(){
+    return "Einige Inhalte wurde noch nicht gespeichert. Die Seite trotzdem verlassen?";
+}
+
 $(document).ready(function(){
     
     $('#open-metas').on('click',function(){
@@ -37,7 +41,12 @@ $(document).ready(function(){
 		    language : sfSetting.lang,
 		    toolbar: "undo redo  | bold italic link | bullist numlist ", //alignleft aligncenter alignright alignjustify |
 		    statusbar: false,
-		    menubar : false
+		    menubar : false,
+		    setup: function (editor) {
+              editor.on ('change', function (e) {
+                  jQuery(window).on("beforeunload",  checkClose);
+              });
+          }
 		});
 
         $('.ec').addClass('bc-e-text');
@@ -52,7 +61,13 @@ $(document).ready(function(){
           language : sfSetting.lang,
           toolbar: "undo redo",
           statusbar: false,
-          menubar : false
+          menubar : false,
+          setup: function (editor) {
+              editor.on ('change', function (e) {
+                  jQuery(window).on("beforeunload",  checkClose);
+              });
+          }
+
         });
 
         $('.ecl').addClass('bc-e-text');
@@ -251,6 +266,7 @@ $(document).ready(function(){
         });
 
         $.post( sfSetting.save+"?ajax=true", data );
+        jQuery(window).off("beforeunload",  checkClose);
         reportSuccess('Die Seite wurden gespeichert');
 
     });
@@ -313,3 +329,10 @@ $(document).ready(function(){
 
     
 });
+
+
+
+
+
+
+
