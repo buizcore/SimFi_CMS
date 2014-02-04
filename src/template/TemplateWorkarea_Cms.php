@@ -537,6 +537,21 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     } // end public function cmsLink */
     
     /**
+     * gibt den wert zurück wenn die page aktiv ist
+     * @param string $page
+     * @param string $val
+     * @return string
+     */
+    public function ifActive($page,$val)
+    {
+        
+        if($this->activePage == $page ){
+            return $val;
+        }
+        
+    } // end public function ifActive */
+    
+    /**
      * checken ob in text key existiert
      * @param string $lang            
      * @return string
