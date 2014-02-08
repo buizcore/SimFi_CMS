@@ -197,12 +197,23 @@ FILE;
 
           foreach ($images as $imgPKey => $imgParam) {
 
-            if (is_string($imgParam)) {
-              $imgParams .= "'{$imgParam}',";
-            } else if (is_bool($imgParam) ) {
-              $imgParams .= ($imgParam?'true':'false').',';
+              
+            if( is_string($imgPKey) ){
+                if (is_string($imgParam)) {
+                    $imgParams .= "'{$imgPKey}' => '{$imgParam}',";
+                } else if (is_bool($imgParam) ) {
+                    $imgParams .= "'{$imgPKey}' => ".($imgParam?'true':'false').',';
+                } else {
+                    $imgParams .= "'{$imgPKey}' => '{$imgParam}',";
+                }
             } else {
-              $imgParams .= "'{$imgParam}',";
+                if (is_string($imgParam)) {
+                    $imgParams .= "'{$imgParam}',";
+                } else if (is_bool($imgParam) ) {
+                    $imgParams .= ($imgParam?'true':'false').',';
+                } else {
+                    $imgParams .= "'{$imgParam}',";
+                }
             }
 
           }

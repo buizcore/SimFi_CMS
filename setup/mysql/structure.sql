@@ -49,14 +49,31 @@ CREATE TABLE IF NOT EXISTS simfi_contact_request (
   UNIQUE KEY rowid (rowid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS simfi_pages (
+CREATE TABLE IF NOT EXISTS simfi_page (
   rowid bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   title varchar(250),
   page_key varchar(250),
-  meta_tags text,
   meta_description text,
-  template varchar(250),
-  created date NOT NULL,
-  last_update date NOT NULL,
+  template_content varchar(250),
+  version int NOT NULL,
+  created datetime NOT NULL,
+  last_update datetime NOT NULL,
+  UNIQUE KEY rowid (rowid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS simfi_page_image (
+  rowid bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  id_page int NOT NULL,
+  id_image int NOT NULL,
+  name varchar(250),
+  UNIQUE KEY rowid (rowid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS simfi_page_text (
+  rowid bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  id_page int NOT NULL,
+  text_key varchar(250) NOT NULL,
+  content text,
+  lang char(2),
   UNIQUE KEY rowid (rowid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
