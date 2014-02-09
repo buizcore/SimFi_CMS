@@ -163,6 +163,18 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     public $localCssFiles = array();
 
     /**
+     * Liste der einzubindenten Header Files
+     * @var array
+     */
+    public $tplHeaders = array();
+
+    /**
+     * Liste der einzubindenten Footer Files
+     * @var array
+     */
+    public $tplFooters = array();
+    
+    /**
      *
      * @return string
      */
