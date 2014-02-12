@@ -12,7 +12,7 @@ class TemplateWorkarea_Json extends TemplateWorkarea_Text
   /**
    * @var string
    */
-  public $contentType = 'text/json';
+  public $contentType = 'application/json';
 
   /**
    * @var string

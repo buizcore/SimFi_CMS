@@ -206,7 +206,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         // wenn ajax dann geben wir json zurück
         if (isset($_GET['ajax'])) {
-            //$this->contentType = 'text/json';
+            //$this->contentType = 'application/json';
         }
         
         // user ist eingeloggt
