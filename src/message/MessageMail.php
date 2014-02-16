@@ -547,7 +547,7 @@ class MessageMail
 
     // ohne adresse geht halt nix
     if (!$address) {
-      throw new LibMessage_Exception('Missing E-Mail Address');
+      throw new Message_Exception('Missing E-Mail Address');
     }
 
     $boundary = 'boundary-'.strtoupper(md5(uniqid(time())));

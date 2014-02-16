@@ -7,7 +7,7 @@
  * @package com.BuizCore
  * @subpackage SimFi
  */
-class Message_Exception extends WebExpertException
+class Message_Exception extends SimFiException
 {
 
 
