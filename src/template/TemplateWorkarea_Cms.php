@@ -174,6 +174,11 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
      */
     public $tplFooters = array();
     
+
+    public $request = null;
+    public $console = null;
+    
+    
     /**
      *
      * @return string
@@ -758,5 +763,33 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         $this->jsonData['status'] = 'ok';
         
     } // end protected function savePage */
+    
+    /**
+     * @return IsARequest
+     */
+    public function getRequest()
+    {
+    
+        if( !$this->request ) {
+            $this->request = Request::getActive();
+        }
+    
+        return $this->request;
+    
+    }//end public function getRequest */
+    
+    /**
+     * @return IsAConsole
+     */
+    public function getConsole()
+    {
+    
+        if ( !$this->console ) {
+            $this->console = Console::getActive();
+        }
+    
+        return $this->console;
+    
+    }//end public function getConsole */
     
 }//end class TemplateWorkarea_Cms */
