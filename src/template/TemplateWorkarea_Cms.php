@@ -38,6 +38,11 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     public $cmsTemplate = null;
 
     /**
+     * @var string
+     */
+    public $statusTemplate = null;
+
+    /**
      *
      * @var array
      */
@@ -290,6 +295,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         // laden des contents
         ob_start();
         
+        /*
         if ($this->cmsTemplate) {
             
             if ($this->conf->platform) {
@@ -302,6 +308,33 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 include $tplName;
             else
                 echo 'Missing Template '.$this->cmsTemplate.NL;
+            
+        } else {
+            
+            if ($this->conf->platform) {
+                $tplName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.template.tpl';
+            } else {
+                $tplName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/template.tpl';
+            }
+            
+            if (Fs::exists($tplName))
+                include $tplName;
+            else
+                echo 'Missing Template for '.$this->rqtPage.NL;
+        }*/
+        
+        if ($this->statusTemplate) {
+            
+            if ($this->conf->platform) {
+                $tplName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/'.$this->conf->platform.'.template.'.$this->statusTemplate.'.tpl';
+            } else {
+                $tplName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/template.'.$this->statusTemplate.'.tpl';
+            }
+            
+            if (Fs::exists($tplName))
+                include $tplName;
+            else
+                echo 'Missing Template for '.$this->rqtPage.NL;
             
         } else {
             
