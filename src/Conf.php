@@ -97,6 +97,10 @@ class Conf
     else
       include CONF_PATH.'conf/host/web/conf.php';
     
+    // routen laden
+    if(file_exists(CONF_PATH.'conf/routes.php'))
+        include CONF_PATH.'conf/routes.php';
+    
     if(!isset($this->settings['base_url'])){
         $this->settings['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
     }
