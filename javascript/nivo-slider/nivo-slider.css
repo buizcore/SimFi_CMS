@@ -113,6 +113,7 @@
 .nivo-controlNav .controls{
     margin:0px auto;
     min-width:500px;  
+    text-align:center;
 }
 
 .nivo-controlNav a {
