@@ -11,7 +11,7 @@ class SetupBuilder
     /**
      * @var CmsSitemapReader
      */
-    public $sitemMap = null;
+    public $sitemap = null;
     
     /**
      * @var Conf
@@ -23,7 +23,7 @@ class SetupBuilder
      */
     public function __construct()
     {
-        $this->sitemMap = new CmsSitemapReader();
+        $this->sitemap = new CmsSitemapReader();
         
         $this->conf = Conf::getActive();
         
@@ -34,13 +34,58 @@ class SetupBuilder
     public function syncProject()
     {
         
-        foreach ($this->sitemMap->pages as $key => $page) {
+        $links = array();
+        $routes = array();
+        
+        foreach($this->sitemap->langs as $lang){
+            $links[$lang] = array();
+        } 
+        
+        foreach ($this->sitemap->pages as $key => $page) {
             
             if(!isset($page['type']) || $page['type'] == 'text' ){
                 $this->createPage_Text($key, $page);
             }
             
+            if(isset($page['routes'])){
+                foreach($page['routes'] as $routeLang => $route){
+                    $routes[$route] = $key;
+                    $links[$routeLang][$key] =  $route;
+                }
+            }
+            
         }
+        
+        
+        $codeRoutes = '';
+        
+        foreach ($routes as $routeKey => $routeTarget) {
+            $codeRoutes .= "  '{$routeKey}' => '{$routeTarget}',".NL;
+        }
+        
+        $codeLinks = '';
+        
+        foreach ($links as $lang => $linkData) {
+            foreach ($linkData as $linkKey => $linkValue) {
+                $codeLinks .= "\$this->links['{$lang}']['{$linkKey}'] = '{$linkValue}';".NL;
+            }
+        }
+        
+        
+        $routePhp = <<<CODE
+<?php
+
+\$this->pageRoutes = array(
+{$codeRoutes}
+);
+    
+\$this->links = array();
+{$codeLinks}
+
+CODE;
+        
+        
+        Fs::write($routePhp, CONF_PATH.'conf/routes.php');
         
     }//end public function syncProject */
     
@@ -52,6 +97,8 @@ class SetupBuilder
     {
         
         $pageFolder = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$key.'/';
+        
+
         
         if (!file_exists($pageFolder)) {
         
