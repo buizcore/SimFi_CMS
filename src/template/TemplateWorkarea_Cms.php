@@ -592,26 +592,26 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
      * @param string $val
      * @return string
      */
-    public function ifActive($page,$val)
+    public function ifPage($page,$val)
     {
         
         if($this->activePage == $page ){
             return $val;
         }
         
-    } // end public function ifActive */
+    } // end public function ifPage */
     
     /**
      * prüfen ob wir in einer bestimmten seite sind
      * @param string $page
      * @return string
      */
-    public function isActive($page)
+    public function isPage($page)
     {
     
         return ($this->activePage == $page );
     
-    } // end public function isActive */
+    } // end public function isPage */
     
     /**
      * checken ob in text key existiert
