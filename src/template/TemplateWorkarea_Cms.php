@@ -86,12 +86,6 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
      *
      * @var array
      */
-    public $links = array();
-
-    /**
-     *
-     * @var array
-     */
     public $images = array();
 
     /**
@@ -446,7 +440,6 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             include PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/logic.php';
         }
         
-        include PATH_ROOT.$this->conf->page_root.'/content/links/'.$this->lang.'.php';
         
     }//end protected function loadPageData */
     
@@ -574,13 +567,13 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         if ($ssl) {
             
-            return isset($this->links[$key]) 
-                ? $this->conf->ssl_base_url.$lang.$this->links[$key].$subLink.$ending 
+            return isset($this->conf->links[$this->lang][$key]) 
+                ? $this->conf->ssl_base_url.$lang.$this->conf->links[$this->lang][$key].$subLink.$ending 
                 : $this->conf->ssl_base_url.$lang.$key.$subLink.$ending;
         } else {
             
-            return isset($this->links[$key]) 
-                ? $this->conf->base_url.$lang.$this->links[$key].$subLink.$ending
+            return isset($this->conf->links[$this->lang][$key]) 
+                ? $this->conf->base_url.$lang.$this->conf->links[$this->lang][$key].$subLink.$ending
                 : $this->conf->base_url.$lang.$key.$subLink.$ending;
         }
         
@@ -637,6 +630,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         }
         
         return isset($this->texts[$lang][$key]);
+        
     } // end public function has */
     
 
