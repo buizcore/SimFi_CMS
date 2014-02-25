@@ -479,6 +479,14 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     } // end public function text */
     
     /**
+     * @return boolean
+     */
+    public function isLoggedIn()
+    {
+        return isset($_SESSION['user_knows_pwd']);
+    }//end public function isLoggedIn
+    
+    /**
      *
      * @param string $key            
      * @param string $subKey            
