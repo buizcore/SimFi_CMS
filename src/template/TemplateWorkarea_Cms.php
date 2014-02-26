@@ -615,6 +615,17 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     } // end public function isPage */
     
     /**
+     * @param string $lang
+     * @return boolean
+     */
+    public function isLang($lang)
+    {
+    
+        return ($this->lang == $lang );
+    
+    } // end public function isLang */
+    
+    /**
      * checken ob in text key existiert
      * @param string $lang            
      * @return string
