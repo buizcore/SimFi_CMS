@@ -17,7 +17,7 @@ class LoginCheck
 
     $conf = Conf::getActive();
 
-    if ($conf->watchword == $watchword) {
+    if ($conf->watch_word == $watchword) {
       $_SESSION['user_knows_pwd'] = true;
     }
 

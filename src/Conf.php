@@ -20,7 +20,7 @@
  * @property array $admin_users
  *
  * @property string $custom_user
- * @property string $watchword
+ * @property string $watch_word
  *
  * @property string project_label
  *
