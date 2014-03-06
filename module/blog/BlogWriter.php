@@ -79,7 +79,7 @@ class BlogWriter
 
 
     if ($entryId) {
-      $entryNode = $this->db->get( 'bc_blog_entry', $entryId, 'BlogEntry');
+      $entryNode = $this->db->get( 'simfi_blog_entry', $entryId, 'BlogEntry');
 
       $entryNode->images = 'static/images/blog/'.$data['name'];
       $entryNode->images_big = 'static/images/blog/big/'.$data['name'];
@@ -96,7 +96,7 @@ class BlogWriter
   public function deleteEntry($entryId)
   {
 
-    $this->db->delete( 'bc_blog_entry', $entryId);
+    $this->db->delete( 'simfi_blog_entry', $entryId);
 
   }//end public function deleteEntry */
 
@@ -108,7 +108,7 @@ class BlogWriter
 
     $entryId = (int)$_GET['entry'];
 
-    $entryNode = $this->db->get( 'bc_blog_entry', $entryId, 'BlogEntry');
+    $entryNode = $this->db->get( 'simfi_blog_entry', $entryId, 'BlogEntry');
 
     if ($publish) {
       $entryNode->active = 1;
