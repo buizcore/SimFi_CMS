@@ -10,15 +10,17 @@ class BlogReader
 
   public $db = null;
 
-
+  /**
+   */
   public function __construct()
   {
     $this->db = Db::getConnection('default');
-  }
+  }//end public function __construct */
 
   /**
    * @param int $offset
    * @param int $limit
+   * @param boolean $showInactive
    * @return array
    */
   public function getEntries($offset = null, $limit = 5, $showInactive = false)
