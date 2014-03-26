@@ -745,7 +745,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 if (is_array($text)) {
                     $this->texts[$this->lang][$textKey] = $text;
                 } else {
-                    $this->texts[$this->lang][$textKey] = $purifier->purify($text);
+                    $this->texts[$this->lang][$textKey] = str_replace('\\"', '"', $purifier->purify($text));
                 }
             }
         }
@@ -755,7 +755,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             
             foreach($_FILES['img']['name'] as $key => $imgName){
        
-                if(!Fs::exists('./static/images/'.$this->activePage.'/page/')){
+                if (!Fs::exists('./static/images/'.$this->activePage.'/page/')) {
                     Fs::mkdir('./static/images/'.$this->activePage.'/page/');
                 }
 
@@ -768,7 +768,8 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                     $nameStack = pathinfo('./static/images/'.$this->activePage.'/page/'.$imgName);
                     $imgName = $nameStack['filename'].'.jpg';
                     
-                    $this->images['page'][$key]['src'] = './static/images/'.$this->activePage.'/page/'.$imgName;
+                    $this->images[$this->activePage][$key]['src'] = './static/images/'.$this->activePage.'/page/'.$imgName;
+                    $this->images[$this->activePage][$key]['alt'] = 'Bild';
                     
                     $imageFormatter = new UtilImageFormatter_Gd();
                     
