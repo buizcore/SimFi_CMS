@@ -105,10 +105,11 @@ class UtilHtmlCleaner_Config extends HTMLPurifier_Config
     $this->htmlAllowedElements[] = "br";
 
     $this->htmlAllowedElements[] = "div";
+    $this->htmlAllowedElements[] = "img";
 
     $this->htmlAllowedElements[] = "h3";
 
-    $this->htmlAllowedAttributes[] = "a.href,a.target";
+    $this->htmlAllowedAttributes[] = "a.href,a.target,img.src,img.alt,img.style";
 
     $this->attrAllowedClasses[] = "";
   }

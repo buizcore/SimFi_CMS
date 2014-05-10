@@ -35,11 +35,11 @@ $(document).ready(function(){
 		    schema: "html5",
 		    inline: true,
 		    plugins: [
-		      "link lists"
+		      "link lists image"
 		    ],
 		    forced_root_block : false,
 		    language : sfSetting.lang,
-		    toolbar: "undo redo  | bold italic link | bullist numlist ", //alignleft aligncenter alignright alignjustify |
+		    toolbar: "undo redo  | bold italic link image | bullist numlist ", //alignleft aligncenter alignright alignjustify |
 		    statusbar: false,
 		    menubar : false,
 		    setup: function (editor) {
