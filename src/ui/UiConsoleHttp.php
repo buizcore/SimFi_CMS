@@ -91,8 +91,23 @@ class UiConsoleHttp extends UiConsoleCli implements IsAConsole
 
     $content = $this->tpl->render();
     $this->tpl->sendHeader();
+    
+    $encode = function_exists('gzencode');
 
-    echo $content;
+    if ($encode && isset($_SERVER ['HTTP_ACCEPT_ENCODING']) && strstr($_SERVER ['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+        // Tell the browser the content is compressed with gzip
+        header("Content-Encoding: gzip");
+        $out = gzencode($content);
+    } else {
+        $out = $content;
+    }
+    
+    header('ETag: '.md5($out));
+    header('Content-Length: '.strlen($out));
+    header('Expires: Thu, 13 Nov 2179 00:00:00 GMT');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    
+    echo $out;
 
   }//end public function publish */
 

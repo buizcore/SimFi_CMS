@@ -125,12 +125,9 @@ class Console
     if( $appendDate )
       $text .= date('Y-m-d');
 
-    if( IS_CLI )
-    {
+    if( IS_CLI ) {
       fwrite( STDERR, 'ERROR: '.$text.NL );
-    }
-    else
-    {
+    } else {
       echo '<p style="color:red;" >ERROR: '.$text.'</p>'.NL;
       flush();
     }
