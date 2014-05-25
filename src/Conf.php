@@ -1,5 +1,6 @@
 <?php
 
+Conf::init();
 
 /**
  * @package com.BuizCore
