@@ -298,7 +298,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 $tplName = PATH_ROOT.$this->conf->page_root.'/content/templates/'.$this->cmsTemplate.'.tpl';
             }
             
-            if (Fs::exists($tplName))
+            if (file_exists($tplName))
                 include $tplName;
             else
                 echo 'Missing Template '.$this->cmsTemplate.NL;
@@ -311,7 +311,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 $tplName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/template.tpl';
             }
             
-            if (Fs::exists($tplName))
+            if (file_exists($tplName))
                 include $tplName;
             else
                 echo 'Missing Template for '.$this->rqtPage.NL;
@@ -325,7 +325,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 $tplName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/template.'.$this->statusTemplate.'.tpl';
             }
             
-            if (Fs::exists($tplName))
+            if (file_exists($tplName))
                 include $tplName;
             else
                 echo 'Missing Template for '.$this->rqtPage.NL;
@@ -338,7 +338,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                 $tplName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/template.tpl';
             }
             
-            if (Fs::exists($tplName))
+            if (file_exists($tplName))
                 include $tplName;
             else
                 echo 'Missing Template for '.$this->rqtPage.NL;
@@ -356,7 +356,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             $idxPath = PATH_ROOT.$this->conf->page_root.'/content/layouts/'.$this->index.'.tpl';
         }
         
-        if (Fs::exists($idxPath))
+        if (file_exists($idxPath))
             include $idxPath;
         else
             echo 'Missing Index '.$this->index.NL;
@@ -689,7 +689,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             $scriptName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/js.php';
         }
         
-        if (Fs::exists($scriptName))
+        if (file_exists($scriptName))
             include $scriptName;
     } // end protected function embededJS */
     
@@ -706,7 +706,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             $scriptName = PATH_ROOT.$this->conf->page_root.'/content/pages/'.$this->rqtPage.'/css.php';
         }
         
-        if (Fs::exists($scriptName))
+        if (file_exists($scriptName))
             include $scriptName;
     } // end protected function embededJS */
     
@@ -755,7 +755,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             
             foreach($_FILES['img']['name'] as $key => $imgName){
        
-                if (!Fs::exists('./static/images/'.$this->activePage.'/page/')) {
+                if (!file_exists('./static/images/'.$this->activePage.'/page/')) {
                     Fs::mkdir('./static/images/'.$this->activePage.'/page/');
                 }
 
