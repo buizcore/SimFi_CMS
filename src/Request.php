@@ -44,10 +44,8 @@ class Request
   public static function parseRequest( $args = null )
   {
 
-    if( IS_CLI )
-    {
-      if( 1 < count($args) )
-      {
+    if( IS_CLI ) {
+      if( 1 < count($args)) {
         $parsed = '';
         parse_str($args[1],$parsed);
 
@@ -56,9 +54,9 @@ class Request
 
       self::$active = new RequestCli( $args );
       return self::$active;
-    }
-    else
-    {
+    
+    } else {
+      
       self::$active = new RequestHttp(  );
       return self::$active;
     }

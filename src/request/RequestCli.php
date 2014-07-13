@@ -6,8 +6,7 @@
  * @subpackage SimFi
  *
  */
-class RequestCli
-  implements IsARequest
+class RequestCli implements IsARequest
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -42,23 +41,33 @@ class RequestCli
     if( 1 == count($args) )
       return;
 
-    foreach( $args as $pos => $argument )
-    {
+    $fileName = array_shift($args);
+    $actionArc = array_shift($args);
+    
+    $tmp = explode('.', $actionArc);
+    
+    $this->service = $tmp[0];
+    
+    if (isset($tmp[1])) {
+        $this->action = $tmp[1];
+    }
+
+    foreach( $args as $pos => $argument ) {
 
       if( !$pos )
         continue;
 
-      if( strpos( $argument, '=' ) )
-      {
+      if( strpos( $argument, '=' ) ) {
+        
         $tmp = explode( '=', $argument );
         $this->params[$tmp[0]] = $tmp[1];
-      }
-      else if( '-' == $argument[0] )
-      {
-        $this->flags[str_replace( '-', '', $argument )] = true;
-      }
-      else
-      {
+      
+      } else if( '-' == $argument[0] ) {
+
+          $this->flags[str_replace( '-', '', $argument )] = true;
+      
+      } else {
+          
         if( !$this->service )
           $this->service = FormatString::subToCamelCase($argument) ;
         else
@@ -81,7 +90,7 @@ class RequestCli
    * @param string $key
    * @return string
    */
-  public function param( $key, $validator )
+  public function param( $key, $validator = null )
   {
 
     return isset($this->params[$key])

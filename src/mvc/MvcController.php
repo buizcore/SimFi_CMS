@@ -110,6 +110,7 @@ class MvcController extends EnvironmentCore
   }//end protected function invalidRequest */
 
   /**
+   * @param string $action
    */
   public function do_help( $action )
   {
@@ -121,7 +122,9 @@ class MvcController extends EnvironmentCore
   public function startSession()
   {
 
-    session_start();
+    if (!IS_CLI) {
+        session_start();
+    }
 
   }//end public function startSession */
 

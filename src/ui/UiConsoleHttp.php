@@ -91,14 +91,19 @@ class UiConsoleHttp extends UiConsoleCli implements IsAConsole
 
     $content = $this->tpl->render();
     $this->tpl->sendHeader();
-    
-    $encode = function_exists('gzencode');
 
-    if ($encode && isset($_SERVER ['HTTP_ACCEPT_ENCODING']) && strstr($_SERVER ['HTTP_ACCEPT_ENCODING'], 'gzip')) {
-        // Tell the browser the content is compressed with gzip
-        header("Content-Encoding: gzip");
-        $out = gzencode($content);
+    if(!DEBUG){
+        $encode = function_exists('gzencode');
+    
+        if ($encode && isset($_SERVER ['HTTP_ACCEPT_ENCODING']) && strstr($_SERVER ['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+            // Tell the browser the content is compressed with gzip
+            header("Content-Encoding: gzip");
+            $out = gzencode($content);
+        } else {
+            $out = $content;
+        }
     } else {
+
         $out = $content;
     }
     

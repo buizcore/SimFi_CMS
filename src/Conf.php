@@ -97,25 +97,33 @@ class Conf
   public function __construct( $domain = null )
   {
 
-    if (is_null($domain))
-      $domain = $_SERVER['SERVER_NAME'];
+    if (!IS_CLI) {
+        
+        if (is_null($domain))
+            $domain = $_SERVER['SERVER_NAME'];
+        
+        if( file_exists( CONF_PATH.'conf/host/'.$domain.'/conf.php' ) )
+            include CONF_PATH.'conf/host/'.$domain.'/conf.php';
+        else
+            include CONF_PATH.'conf/host/web/conf.php';
+        
+        // routen laden
+        if(file_exists(CONF_PATH.'conf/routes.php'))
+            include CONF_PATH.'conf/routes.php';
+        
+        if(!isset($this->settings['base_url'])){
+            $this->settings['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
+        }
+        
+        if(!isset($this->settings['ssl_base_url'])){
+            $this->settings['ssl_base_url'] = 'https://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
+        }
+        
+    } else {
 
-    if( file_exists( CONF_PATH.'conf/host/'.$domain.'/conf.php' ) )
-      include CONF_PATH.'conf/host/'.$domain.'/conf.php';
-    else
-      include CONF_PATH.'conf/host/web/conf.php';
-    
-    // routen laden
-    if(file_exists(CONF_PATH.'conf/routes.php'))
-        include CONF_PATH.'conf/routes.php';
-    
-    if(!isset($this->settings['base_url'])){
-        $this->settings['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
+        include CONF_PATH.'conf/host/cli/conf.php';
     }
-    
-    if(!isset($this->settings['ssl_base_url'])){
-        $this->settings['ssl_base_url'] = 'https://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
-    }
+
 
   }//end public function __construct */
 

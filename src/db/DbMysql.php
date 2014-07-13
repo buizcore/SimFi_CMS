@@ -96,8 +96,9 @@ class DbMysql extends Db_Connection
         $this->connection = new mysqli($this->host, $this->user, $this->passwd, $this->dbName, $this->port);
         
         if ($this->connection->connect_error) {
-            throw new DbException($mysqli->connect_errno.' '.$mysqli->connect_error);
+            throw new DbException($this->connection->connect_errno.' '.$this->connection->connect_error);
         }
+        
     } // end public function open */
     
     /**
@@ -144,12 +145,13 @@ SQL;
         
         $data = $result->fetch_assoc();
         
-        if (! $className)
+        if (!$className)
             $className = UtilStrings::subToCamelCase($table).'_Entity';
         else
             $className = $className.'_Entity';
         
         return new $className($data);
+        
     } // end public function get */
     
     /**
@@ -238,15 +240,16 @@ SQL;
         }
         
         if (is_string($sql)) {
+            
             $this->connection->query($sql);
             return $this->connection->insert_id;
+            
         } else {
             
             $keys = $sql->getCols();
             $saveFields = array();
             
             foreach ($keys as $field) {
-                
                 $saveFields[$field] = $sql->escaped($field, $this);
             }
             
@@ -263,11 +266,14 @@ SQL;
                 throw new DbException($this->connection->error);
             }
             
-            $sql->rowid = $this->connection->insert_id;
+            if ($sql->pkSequence()) {
+                $sql->rowid = $this->connection->insert_id;
+            }
             
             return $sql->rowid;
         }
-    } // end public function insert */
+        
+    }//end public function insert */
     
     /**
      * Ein Updatestatement an die Datenbank schicken
@@ -310,7 +316,8 @@ SQL;
             
             return $this->connection->affected_rows;
         }
-    } // end public function update */
+        
+    }//end public function update */
     
     /**
      * Ein Delete Statement
