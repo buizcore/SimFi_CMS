@@ -523,6 +523,17 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     
     /**
      *
+     * @param string $val1
+     * @param string $val2
+     * @return string
+     */
+    public function selected($val1, $val2)
+    {
+        return $val1 == $val2 ?  ' selected="selected" ' : '';
+    } // end public function selected */
+    
+    /**
+     *
      * @param string $key            
      * @param string $subKey            
      * @return string

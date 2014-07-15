@@ -188,12 +188,17 @@ SQL;
         
         $data = $result->fetch_assoc();
         
+        if (!$data) {
+            return null;
+        }
+        
         if (! $className)
             $className = UtilStrings::subToCamelCase($table).'_Entity';
         else
             $className = $className.'_Entity';
         
         return new $className($data);
+        
     } // end public function get */
     
     /**
@@ -382,6 +387,7 @@ SQL;
             return "'".$this->connection->real_escape_string($string)."'";
         else
             return $string;
+        
     } // end public function escape */
       
 // //////////////////////////////////////////////////////////////////////////////
