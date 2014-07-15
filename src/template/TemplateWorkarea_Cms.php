@@ -663,7 +663,15 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
     } // end public function has */
     
-
+    /**
+     * @param string $page
+     */
+    public function redirect($page)
+    {
+        header('Location: '.$this->conf->web_root.$page.'.html' );
+        exit(0);
+    }
+    
     /**
      *
      * @param string $key            
