@@ -159,10 +159,10 @@ SQL;
      * eine einfach select abfrage an die datenbank
      * select wird immer auf der lesende connection ausgeführt
      *
-     * @param string $sql
+     * @param string $table
      *            ein SQL String
-     * @param string $singleRow
-     * @param boolean $expectResult
+     * @param string $id
+     * @param string $key
      *
      * @return array/scalar
      * @throws DbException - bei inkompatiblen parametern
@@ -174,17 +174,17 @@ SQL;
         }
     
         $sql = <<<SQL
-SELECT rowid FROM {$table} where {$key} = {$this->escape(id)} ;
+SELECT rowid FROM {$table} where {$key} = {$this->escape($id)} ;
 SQL;
     
         $result = $this->connection->query($sql);
-        if (! $result) {
+        if (!$result) {
             throw new DbException($this->connection->error);
         }
     
         $data = $result->fetch_assoc();
         
-        if( isset($data['rowid']) ){
+        if (isset($data['rowid'])) {
             return $data['rowid'];
         } else {
             return null;
@@ -248,7 +248,7 @@ SQL;
      * @param string $singleRow            
      * @param boolean $expectResult            
      *
-     * @return array/scalar
+     * @return DbMysqlResult
      * @throws DbException - bei inkompatiblen parametern
      */
     public function select($sql, $expectResult = false)
@@ -264,6 +264,7 @@ SQL;
         }
         
         return new DbMysqlResult($result, $this);
+        
     } // end public function select */
     
     /**
