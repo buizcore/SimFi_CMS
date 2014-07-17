@@ -159,6 +159,44 @@ SQL;
      * eine einfach select abfrage an die datenbank
      * select wird immer auf der lesende connection ausgeführt
      *
+     * @param string $table
+     *            ein SQL String
+     * @param string $id
+     * @param string $key
+     *
+     * @return array/scalar
+     * @throws DbException - bei inkompatiblen parametern
+     */
+    public function getIyByKey($table, $id, $key = 'access_key')
+    {
+        if (! is_resource($this->connection)) {
+            $this->open();
+        }
+    
+        $sql = <<<SQL
+SELECT rowid FROM {$table} where {$key} = {$this->escape($id)} ;
+SQL;
+    
+        $result = $this->connection->query($sql);
+        if (!$result) {
+            throw new DbException($this->connection->error);
+        }
+    
+        $data = $result->fetch_assoc();
+        
+        if (isset($data['rowid'])) {
+            return $data['rowid'];
+        } else {
+            return null;
+        }
+
+    } // end public function getIyByKey */
+    
+    /**
+     * de:
+     * eine einfach select abfrage an die datenbank
+     * select wird immer auf der lesende connection ausgeführt
+     *
      * @param string $sql
      *            ein SQL String
      * @param string $singleRow            
@@ -188,12 +226,17 @@ SQL;
         
         $data = $result->fetch_assoc();
         
+        if (!$data) {
+            return null;
+        }
+        
         if (! $className)
             $className = UtilStrings::subToCamelCase($table).'_Entity';
         else
             $className = $className.'_Entity';
         
         return new $className($data);
+        
     } // end public function get */
     
     /**
@@ -205,7 +248,7 @@ SQL;
      * @param string $singleRow            
      * @param boolean $expectResult            
      *
-     * @return array/scalar
+     * @return DbMysqlResult
      * @throws DbException - bei inkompatiblen parametern
      */
     public function select($sql, $expectResult = false)
@@ -221,6 +264,7 @@ SQL;
         }
         
         return new DbMysqlResult($result, $this);
+        
     } // end public function select */
     
     /**
@@ -382,6 +426,7 @@ SQL;
             return "'".$this->connection->real_escape_string($string)."'";
         else
             return $string;
+        
     } // end public function escape */
       
 // //////////////////////////////////////////////////////////////////////////////

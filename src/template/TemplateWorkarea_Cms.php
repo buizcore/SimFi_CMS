@@ -237,6 +237,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                     if ($password === sha1($_POST['password'])) {
                         $_SESSION['user'] = $_POST['user'];
                         $this->adminMode = true;
+                        $this->rqtPage = $this->conf->start_page;
                     }
                 }
             }
@@ -244,7 +245,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         if ('admin' == $this->mode && ! $this->adminMode) {
             
-            $this->rqtPage = 'home';
+            $this->rqtPage = $this->conf->start_page;
         }
         
         if ('logout' == $this->mode) {
@@ -523,6 +524,17 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     
     /**
      *
+     * @param string $val1
+     * @param string $val2
+     * @return string
+     */
+    public function selected($val1, $val2)
+    {
+        return $val1 == $val2 ?  ' selected="selected" ' : '';
+    } // end public function selected */
+    
+    /**
+     *
      * @param string $key            
      * @param string $subKey            
      * @return string
@@ -652,7 +664,15 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
     } // end public function has */
     
-
+    /**
+     * @param string $page
+     */
+    public function redirect($page)
+    {
+        header('Location: '.$this->conf->web_root.$page.'.html' );
+        exit(0);
+    }
+    
     /**
      *
      * @param string $key            

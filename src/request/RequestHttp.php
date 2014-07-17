@@ -328,12 +328,22 @@ class RequestHttp implements IsARequest
   *
   * @return array
   */
-  public function data( $key = null, $validator = null  )
+  public function data( $key = null, $validator = null, $subData = null  )
   {
 
-    return isset( $_POST[$key] )
-      ? $_POST[$key]
-      : null;
+    if ($subData) {
+        
+        return isset( $_POST[$key][$subData] )
+        ? $_POST[$key][$subData]
+        : null;
+        
+    } else {
+        return isset( $_POST[$key] )
+        ? $_POST[$key]
+        : null;
+    }
+      
+
 
   } // end public function data */
 

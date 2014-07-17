@@ -56,6 +56,22 @@ class BuizcoreConnector_Client
      */
     public $respHeader = array();
     
+
+    /**
+     * @param array $conf
+     */
+    public function __construct($conf = array())
+    {
+    
+        if ($conf) {
+            $this->gatewayUrl = $conf['url'];
+            $this->userName = $conf['user'];
+            $this->password = $conf['pwd'];
+            $this->ssl = $conf['ssl'];
+        }
+        
+    }//end public function __construct */
+    
     /**
      * @param string $method
      * @param string $subUrl
