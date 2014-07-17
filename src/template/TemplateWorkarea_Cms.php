@@ -237,6 +237,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
                     if ($password === sha1($_POST['password'])) {
                         $_SESSION['user'] = $_POST['user'];
                         $this->adminMode = true;
+                        $this->rqtPage = $this->conf->start_page;
                     }
                 }
             }
@@ -244,7 +245,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         
         if ('admin' == $this->mode && ! $this->adminMode) {
             
-            $this->rqtPage = 'home';
+            $this->rqtPage = $this->conf->start_page;
         }
         
         if ('logout' == $this->mode) {
