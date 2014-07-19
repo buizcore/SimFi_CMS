@@ -1,6 +1,6 @@
 <?php
 
-class FreeRadius
+class AuthFreeRadius
 {
     /**
      * @var DbMysql
@@ -11,7 +11,7 @@ class FreeRadius
     /**
      * @param DbMysql $dbConnection
      */
-    function __construct($db)
+    public function __construct($db)
     {
         $this->db = $db;
     }
@@ -21,7 +21,7 @@ class FreeRadius
      * @param string $username
      * @param string $password
      */
-    function createUser($username, $password, $sessionTimeout = 120)
+    public function createUser($username, $password, $sessionTimeout = 120)
     {
         try {
             $this->db->begin();
@@ -40,9 +40,10 @@ class FreeRadius
      *
      * @param string $username
      */
-    function deleteUser($username)
+    public function deleteUser($username)
     {
         $sql = sprintf("DELETE FROM radcheck WHERE username=%s", $this->db->escape($username));
         $this->db->delete($sql);
     }
-}
+    
+}//end AuthFreeRadius */
