@@ -50,7 +50,7 @@ class Db
   /**
    * @param string $key
    * @param array $conf
-   * @return Db_Connection
+   * @return DbMysql
    */
   public static function getConnection( $key = 'default', $conf = null)
   {

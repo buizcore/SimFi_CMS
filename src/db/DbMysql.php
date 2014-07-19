@@ -58,7 +58,8 @@ class DbMysql extends Db_Connection
     protected $escapeTypes = array(
         'text' => true,
         'date' => true,
-        'time' => true
+        'datetime' => true,
+        'time' => true,
     );
 
     /**
@@ -307,7 +308,7 @@ SQL;
             $this->connection->query($sqlString);
             
             if ($this->connection->error) {
-                throw new DbException($this->connection->error);
+                throw new DbException($this->connection->error.' '.$sqlString);
             }
             
             if ($sql->pkSequence()) {
