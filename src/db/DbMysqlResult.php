@@ -5,27 +5,12 @@
  * @package com.BuizCore
  * @subpackage SimFi
  */
-class DbMysqlResult extends Db_Connection
+class DbMysqlResult extends Db_Result
 {
 
-  protected $result = null;
-
-  protected $connection = null;
-
 
   /**
-   * @param Resouce $result
-   * @param Resouce $connection
-   */
-  public function __construct($result, $connection)
-  {
-    $this->result = $result;
-    $this->connection = $connection;
-  }//end public function __construct */
-
-
-  /**
-   *
+   * @return array
    */
   public function getAll()
   {
@@ -37,5 +22,27 @@ class DbMysqlResult extends Db_Connection
     return $all;
   }//end public function getAll */
 
+  /**
+   * @return array
+   */
+  public function get()
+  {
+      
+      $this->row = $this->result->fetch_assoc();
+      ++$this->pos;
+      
+      return $this->row;
+      
+  }//end public function get */
+  
+  /**
+   *
+   */
+  public function rewind()
+  {
+      
+      $this->result->data_seek( 0 );
+       
+  }//end public function rewind */
 
 }//end class DbMysqlResult
