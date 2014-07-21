@@ -18,6 +18,11 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
      * @var string
      */
     public $index = 'default';
+    /**
+     *
+     * @var string
+     */
+    public $sidebar = null;
 
     /**
      *
