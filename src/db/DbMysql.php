@@ -278,16 +278,37 @@ SQL;
      * @return int
      * @throws DbException im fehlerfall
      */
-    public function insert($sql)
+    public function insert($sql, $values = array())
     {
         if (! is_resource($this->connection)) {
             $this->open();
         }
         
         if (is_string($sql)) {
-            
-            $this->connection->query($sql);
-            return $this->connection->insert_id;
+
+            if ($values) {
+
+                $sqlField = '('.implode(', ', array_keys($values)).')';
+                $sqlValues = 'VALUES('.implode(', ', $values).')';
+                
+                $sqlString = <<<SQL
+INSERT INTO {$sql} {$sqlField} {$sqlValues};
+SQL;
+                
+                $this->connection->query($sqlString);
+                
+                if ($this->connection->error) {
+                    throw new DbException($this->connection->error.' '.$sqlString);
+                }
+                
+                $sql->rowid = $this->connection->insert_id;
+                return $sql->rowid;
+                
+            } else {
+
+                $this->connection->query($sql);
+                return $this->connection->insert_id;
+            }
             
         } else {
             
