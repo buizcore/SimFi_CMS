@@ -47,13 +47,6 @@ class Db_Result implements Iterator
         return array();
     }//end public function getAll */
 
-    /**
-     *
-     */
-    public function rewind()
-    {
-       
-    }//end public function rewind */
     
 /*//////////////////////////////////////////////////////////////////////////////
  // Interface: Iterator
