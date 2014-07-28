@@ -75,6 +75,15 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     );
 
     /**
+     * @var array
+     */
+    public $messages = array(
+    	'error' => array(),
+    	'warning' => array(),
+    	'notice' => array(),
+    );
+
+    /**
      *
      * @var [function]
      */
