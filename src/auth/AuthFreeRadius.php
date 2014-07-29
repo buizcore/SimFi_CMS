@@ -27,9 +27,9 @@ class AuthFreeRadius
         
         try {
             $this->db->begin();
-            $sql = sprintf("INSERT INTO radcheck values ('','%s','Password',':=','%s')", $this->db->escape($username), $this->db->escape($password));
+            $sql = sprintf("INSERT INTO radcheck values ('',%s,'Password',':=',%s)", $this->db->escape($username), $this->db->escape($password));
             $this->db->insert($sql);
-            $sql = sprintf("INSERT INTO radcheck values ('','%s','Max-All-Session',':=','%s')", $this->db->escape($username), $this->db->escape($sessionTimeout));
+            $sql = sprintf("INSERT INTO radcheck values ('',%s,'Max-All-Session',':=',%s)", $this->db->escape($username), $sessionTimeout);
             $this->db->insert($sql);
             $this->db->commit();
         } catch (Exception $e) {
@@ -49,6 +49,19 @@ class AuthFreeRadius
         $sql = sprintf("DELETE FROM radcheck WHERE username=%s", $this->db->escape($username));
         $this->db->delete($sql);
         
+    }//end public function deleteUser */
+    
+    /**
+     * Löscht den Benutzer
+     *
+     * @param string $username
+     */
+    public function checkIfUserExists($username)
+    {
+    
+        $sql = sprintf("DELETE FROM radcheck WHERE username=%s", $this->db->escape($username));
+        $this->db->delete($sql);
+    
     }//end public function deleteUser */
     
 }//end AuthFreeRadius */

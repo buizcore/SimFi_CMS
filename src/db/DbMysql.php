@@ -466,7 +466,7 @@ SQL;
             $this->open();
         }
         
-        $this->connection->begin();
+        $this->connection->begin_transaction();
     } // end public function begin */
     
     /**
