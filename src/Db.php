@@ -55,12 +55,20 @@ class Db
   public static function getConnection( $key = 'default', $conf = null)
   {
 
+    if(!$key)
+        $key = 'default';
+      
     if(!isset(self::$connections[$key])){
 
       if(!$conf)
         $conf = Conf::getActive();
 
       $dbConf = $conf->db;
+      
+      if (!isset($dbConf[$key])) {
+          throw new DbException('Requested noexisting db connection '.$key );
+      }
+      
       $conConf = $dbConf[$key];
 
       if (strtolower($conConf['driver'])==='postgresql') {
@@ -72,8 +80,8 @@ class Db
         self::$connections[$key] = new DbMysql($conConf['name'], $conConf['user'], $conConf['pwd'], $conConf['host'], $conConf['port']);
 
       } else {
-
-        throw new DbException('Requested nonsupported db driver: '.$conConf['driver'] );
+          
+        throw new DbException('Requested nonsupported db driver: '.$conConf['driver'].' '.$key );
       }
 
     }

@@ -466,7 +466,7 @@ SQL;
             $this->open();
         }
         
-        $this->connection->begin_transaction();
+        $this->connection->autocommit(false);
     } // end public function begin */
     
     /**
@@ -487,6 +487,7 @@ SQL;
     public function commit()
     {
         $this->connection->commit();
+        $this->connection->autocommit(true);
     } // end public function commit */
     
 }//end class DbMysql
