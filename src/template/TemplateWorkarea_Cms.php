@@ -244,22 +244,48 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
             
             $this->mode = 'admin';
             
+
+            
             if (isset($_POST['user'])) {
                 
-                $password = $this->getVal('users', $_POST['user']);
-                if ($password) {
-                    if ($password === sha1($_POST['password'])) {
+                if ($this->conf->auth_adapter) {
+                    
+                    $className = $this->conf->auth_adapter;
+                    
+                    $db = Db::getConnection();
+                    $authAdapter = new $className($db);
+                    
+                    if ($authAdapter->checkLogin($_POST['user'], $_POST['password'])) {
                         $_SESSION['user'] = $_POST['user'];
                         $this->adminMode = true;
                         $this->rqtPage = $this->conf->start_page;
                     }
+                
+                } else {
+                    
+                    $password = $this->getVal('users', $_POST['user']);
+                    if ($password) {
+                        if ($password === sha1($_POST['password'])) {
+                            $_SESSION['user'] = $_POST['user'];
+                            $this->adminMode = true;
+                            $this->rqtPage = $this->conf->start_page;
+                        }
+                    }
                 }
+                
+
             }
         }
         
         if ('admin' == $this->mode && ! $this->adminMode) {
             
-            $this->rqtPage = $this->conf->start_page;
+            if ($this->conf->login_page) {
+
+                $this->rqtPage = $this->conf->login_page;
+            } else {
+
+                $this->rqtPage = $this->conf->start_page;
+            }
         }
         
         if ('logout' == $this->mode) {
@@ -765,7 +791,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
      */
     protected function savePage($action = null)
     {
-        require_once PATH_ROOT.$this->conf->fw_root.'/vendor/htmlpurifier/library/HTMLPurifier.auto.php';
+        require_once SIMFI_CODE_PATH.'/vendor/htmlpurifier/library/HTMLPurifier.auto.php';
         
         $defConf = new UtilHtmlCleaner_Config();
         $config = $defConf->getConfig();
