@@ -56,14 +56,6 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         'en' => array()
     );
 
-    /**
-     *
-     * @var array
-     */
-    public $metaTags = array(
-        'de' => array(),
-        'en' => array()
-    );
 
     /**
      *
@@ -192,15 +184,7 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
     public $console = null;
     
     
-    /**
-     *
-     * @return string
-     */
-    public function renderMetaTags()
-    {
-        return isset($this->metaTags[$this->lang]) ? implode(',', $this->metaTags[$this->lang]) : '';
-    } // end public function renderMetaTags */
-    
+
     /**
      *
      * @return string
@@ -865,7 +849,6 @@ class TemplateWorkarea_Cms extends TemplateWorkarea
         if (isset($_POST['meta'])) {
             $this->title[$this->lang] = strip_tags(trim($_POST['meta']['title'])) ;
             $this->metaDescription[$this->lang] = strip_tags(trim($_POST['meta']['description']));
-            $this->metaTags[$this->lang] = explode(',',trim($_POST['meta']['tags']));
         }
         
         $pageWriter = new CmsDataWriter($this);

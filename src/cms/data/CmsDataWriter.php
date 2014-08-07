@@ -31,11 +31,6 @@ class CmsDataWriter
 
   /**
    * @var array
-   */
-  public $metaTags = array();
-
-  /**
-   * @var array
   */
   public $metaDescription = array();
 
@@ -57,7 +52,6 @@ class CmsDataWriter
     $this->texts = $view->texts;
     $this->images = $view->images;
     $this->metaDescription = $view->metaDescription;
-    $this->metaTags = $view->metaTags;
     $this->title = $view->title;
 
   }
@@ -107,16 +101,6 @@ FILE;
 
     }// end foreach metaDescription
 
-    foreach ($this->metaTags as $lang => $tags) {
-
-      $tagsCode = "array('".implode("', '",$tags )."')";
-
-      $file .= <<<FILE
-\$this->metaTags['{$lang}'] = {$tagsCode};
-
-FILE;
-
-    }// end foreach metaTags
 
     foreach ($this->texts as $lang => $texts) {
 
